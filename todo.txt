@@ -1,0 +1,246 @@
+// hacer que se ponga activo un button del sidebar cuando haga click en el 
+sin renderizar mas de un componente otra vez sino que llame a un enveto que verifique el click y la ruta
+y se pinte el botton respecto a eso.
+
+// solution
+le paso unos props en el classnname ACTIVE COMO PROPP
+
+
+//make dinamyc componns render 
+
+
+// verificar que los las peticiones al backend sean las correactas 
+
+// usar controlados inputs y validarlos con IFELSE , 
+te arreglaria el modal y te daria mas control
+
+
+
+
+
+
+
+// elimne la clase navbar-form para que pueda continuar la app, ya que no estoy usando este componente
+  {/* <form class="navbar-form navbar-right" role="search">
+        <div class="form-group is-empty">
+          <input type="text" class="form-control" placeholder="Search" />
+          <span class="material-input"></span>
+          <span class="material-input"></span>
+        </div>
+        <button type="submit" class="btn btn-white btn-round btn-just-icon">
+          <i class="material-icons">search</i>
+          <div class="ripple-container"></div>
+        </button>
+      </form> */}
+
+
+// forgot password
+/* <div className="d-flex justify-content-around">
+          <div>
+            <div className="custom-control custom-checkbox">
+              <input
+                type="checkbox"
+                className="custom-control-input"
+                id="defaultLoginFormRemember"
+              />
+              <label
+                className="custom-control-label"
+                for="defaultLoginFormRemember"
+              >
+                Remember me
+              </label>
+            </div>
+          </div>
+          <div>
+            <a href="">Forgot password?</a>
+          </div>
+        </div> */
+
+
+
+
+//controloados componentes 
+1.login
+  // const initialFormState = { email: "", password: "" };
+  // const [entrar, setEntrar] = useState(initialFormState);
+
+  // const handleInputChangeLogin = event => {
+  //   const { name, value } = event.target;
+  //   setEntrar({ ...entrar, [name]: value }); //anade el name y surname mas al adduser
+  // };
+  // // "email":"sssimple.33@gmail.com",
+  // // "password":"pepecuenca"
+  // const onSubmitLogin = e => {
+  //   e.preventDefault();
+  //   console.log(entrar);
+
+  //   // un ruta nada mas ya lo separon en el back dependiendo de lo queme mande.
+  //   axios.post("http://localhost:3000/api/admin/login", entrar).then(res => {
+  //     if (res.request.status === 200) {
+  //       activateAuth(res.data);
+  //       // console.log(window.sessionStorage.getItem("token"))
+  //       navigate(`/`);
+  //     }
+  //   });
+  // };
+
+  2.register
+    // const initialFormStateTwo = { name: "", email: "", password: "" };
+  // const [registro, setRegistro] = useState(initialFormStateTwo);
+
+  // const handleInputChangeRegistro = event => {
+  //   const { name, value } = event.target;
+  //   setRegistro({ ...registro, [name]: value }); //anade el name y surname mas al adduser
+  // };
+
+
+
+  3manage role asgimenet creacion de perrsonel
+    // const onSubmitRegistro = e => {
+  //   console.log(registro);
+  //   console.log(user._id);
+
+  //   e.preventDefault();
+  //   if (!registro) return;
+  //   console.log(registro);
+  //   axios
+  //     .post(
+  //       "http://localhost:3000/api/personal/register",
+  //       {
+  //         ...registro
+  //       },
+  //       {
+  //         params: {},
+  //         headers: { "auth-token": window.sessionStorage.getItem("token") }
+  //       }
+  //     )
+  //     .then(res => {
+  //       // me devuelve mi lista de personles
+  //       console.log(res.data);
+  //       setMyPersonel(res.data);
+  //     });
+  //   console.log(registro);
+  //   setRegistro(initialFormStateTwo);
+  // };
+
+  // const onSubmitRegistro = e => {
+  //   e.preventDefault();
+  //   if (!registro) return;
+  //   axios
+  //     .post("http://localhost:3000/api/admin/register", registro)
+  //     .then(res => {
+  //       activateAuth(res.data);
+  //       navigate(`/`);
+  //     });
+  //   setRegistro(initialFormStateTwo);
+  // };
+
+
+  ///2.2 search funcionanlitie
+    {/* <form className="navbar-form">
+              <div className="input-group no-border">
+                <input
+                  type="text"
+                  value=""
+                  className="form-control"
+                  placeholder="Search..."
+                />
+                <button
+                  type="submit"
+                  className="btn btn-white btn-round btn-just-icon"
+                >
+                  <i className="material-icons">search</i>
+                  <div className="ripple-container"></div>
+                </button>
+              </div>
+            </form> */}
+
+
+
+
+
+//pagintae con ayuda de flechas atras y adleante < >
+ <li class="page-item">
+                          <a
+                            class="page-link"
+                            onClick={() => paginate(pageNumbers.length - 1)}
+                            aria-label="Previous"
+                          >
+                            <span aria-hidden="true">&laquo;</span>
+                          </a>
+                        </li>
+
+
+
+ // show entries funcionnalities
+
+   // const [userIndex, setUserIndex] = useState("");
+
+  // const handleUserIndex = e => {
+  //   console.log(e.target.value);
+  //   if (e.target.value == undefined) {
+  //     setUserIndex("");
+  //   } else {
+  //     setUserIndex(e.target.value);
+  //   }
+  // };
+
+  
+    {/* <div>
+                  Show
+                  <input
+                    type="text"
+                    // placeholder={postsPerPage}
+                    value={userIndex}
+                    onChange={handleUserIndex}
+                  />
+                  entries
+                </div> */}
+
+
+
+      --FACTORIZAR LOS MODALES Y LAS TABLAS EN COMPONTETES REUTILIZABLES PARA ESO
+      CREAR UNOS HELPERS QUE TE 
+      AYUDEN CON LOS REQUEST Y EL SEARCH QUE SON PERSONALIZADOS
+
+
+
+        // TAREA
+  // const [ticketsAssignedToDevs, setTicketsAssignedToDevs] = useState([
+  //   [
+  //     ["devName", "Pepe"],
+  //     ["sdfsadfwqer", 6]
+  //   ]
+  // ]);
+
+  // count = {5e250fbfe0172c857208de9c: 6 , 5e250202b324227473caca06: 2}
+
+  // add devName to this count
+  // for (let i = 0; i < listOfTicketsToGraph.length; i++) {
+  //   if (listOfTicketsToGraph[i].assignedDeveloper) {
+  //     if ((listOfTicketsToGraph[i].assignedDeveloper.devId = count[0])) {
+  //       count[0]["devName"] =
+  //         listOfTicketsToGraph[i].assignedDeveloper.devName;
+  //       break;
+  //     }
+  //   }
+  // }
+
+  //for +++
+  // for (let i = 0; i < ticketsAssignedToDevs.length; i++) {
+  //   data.push([ticketsAssignedToDevs[i][0], ticketsAssignedToDevs[i][0]]);
+  // }
+
+  // data = [
+  //   ["Name ", "TicketsAssigned"],
+  // ]
+  //   ["pepe", typeTickets.featureTickets],
+  //   ["ana", typeTickets.inquiryTickets],
+  //   ["loco", typeTickets.bugTickets]
+
+  // pushear todlos los IDS los que tengan un assigned developer a un array , lueggo contar los iguales y buscar en nombre con ese id
+
+  // uniqueCount = ["a","b","c","d","d","e","a","b","c","f","g","h","h","h","e","a"];
+  // var  count = {};
+  // uniqueCount.forEach(function(i) { count[i] = (count[i]||0) + 1;});
+  // console.log(count);

@@ -1,0 +1,12 @@
+#tbody tr,
+#tbody tr td {
+  padding: 0;
+  margin: 0;
+}
+
+.form-control:focus,
+.bmd-form-group.is-focused .form-control {
+  background-size: 0% 30%, 100% 100%;
+  transition-duration: 0.3s;
+  border-bottom: 1px solid #828283 !important;
+}
