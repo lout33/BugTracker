@@ -5,7 +5,7 @@ import { navigate } from "@reach/router";
 import axios from "axios";
 
 import { backend_route } from "./../GlobalVariables";
-
+import { SuccesCenterTimer, ErrorCenterTimer } from "./../animations/Alerts";
 export default props => {
   // props.ticketId
 
@@ -48,6 +48,8 @@ export default props => {
   };
 
   const onUpdateTicket = () => {
+    console.log("update");
+
     axios
       .post(
         `${backend_route}/api/global/ticket/updateTicketById`,
@@ -59,12 +61,12 @@ export default props => {
         }
       )
       .then(res => {
-        if (res.request.status === 200) {
-          console.log("ticket creado correctamente");
-          setTicketToEdit(res.data);
-        } else {
-          console.log("error pe chino");
-        }
+        setTicketToEdit(res.data);
+        SuccesCenterTimer.fire();
+      })
+      .catch(err => {
+        ErrorCenterTimer.fire();
+        console.log(err);
       });
   };
 
@@ -73,7 +75,7 @@ export default props => {
   };
 
   return (
-    <div>
+    <div className="mt-3">
       <div className="content">
         <div className="container-fluid">
           <div className="row">

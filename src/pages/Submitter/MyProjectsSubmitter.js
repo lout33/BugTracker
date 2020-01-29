@@ -93,7 +93,7 @@ export default function MyProjectsSubmitter() {
   //////////////////////////////////////////////////////
 
   return (
-    <div>
+    <div className="mt-3">
       <div className="content">
         <div className="container-fluid">
           <div>List of projects</div>

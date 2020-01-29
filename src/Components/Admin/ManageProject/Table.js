@@ -1,6 +1,8 @@
 import React, { useState, useContext, useEffect } from "react";
 import { Context } from "../../../Context";
 
+import { SuccesCenterTimer } from "./../../../animations/Alerts";
+
 import Swal from "sweetalert2";
 import { backend_route } from "../../../GlobalVariables";
 import axios from "axios";
@@ -51,26 +53,40 @@ export function Table({ filteredArray }) {
     console.log(projectId);
     console.log(personalId);
 
-    axios
-      .post(
-        `${backend_route}/api/admin/project/deleteAssignedProject`,
-        {
-          projectId: projectId,
-          // projectName: pickedProject.projectName,
-          personalId: personalId
-        },
-        {
-          params: {},
-          headers: { "auth-token": window.sessionStorage.getItem("token") }
-        }
-      )
-      .then(function(res) {
-        console.log(res.data);
-        setMyPersonel(res.data);
-      })
-      .catch(function(error) {
-        console.log(error);
-      });
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!"
+    }).then(result => {
+      if (result.value) {
+        axios
+          .post(
+            `${backend_route}/api/admin/project/deleteAssignedProject`,
+            {
+              projectId: projectId,
+              // projectName: pickedProject.projectName,
+              personalId: personalId
+            },
+            {
+              params: {},
+              headers: { "auth-token": window.sessionStorage.getItem("token") }
+            }
+          )
+          .then(function(res) {
+            console.log(res.data);
+
+            setMyPersonel(res.data);
+            SuccesCenterTimer.fire();
+          })
+          .catch(function(error) {
+            console.log(error);
+          });
+      }
+    });
   };
 
   return (

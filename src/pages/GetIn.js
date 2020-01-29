@@ -3,32 +3,15 @@ import { Context } from "./../Context";
 import { navigate } from "@reach/router";
 import Login from "./../Components/GetIn/Login";
 import Register from "./../Components/GetIn/Register";
-import axios from "axios";
 import DemoUser from "../Components/GetIn/DemoUser";
-import { backend_route } from "./../GlobalVariables";
 import styled from "styled-components";
-// import "./../index.css";
+
 export default () => {
   const { isAuth } = useContext(Context);
   const [isLogginActive, setIsLogginActive] = useState("login");
-  // const onToggleLoggin = place => {
-  //   if (place == "login") {
-  //     setIsLogginActive({
-  //       name: "login"
-  //     });
-  //   } else if (place == "register") {
-  //     setIsLogginActive({
-  //       name: "register"
-  //     });
-  //   } else if (place == "demouser") {
-  //     setIsLogginActive({
-  //       name: "demouser"
-  //     });
-  //   }
-  // };
 
   return (
-    <div className="getinBackground">
+    <BackgroundStyle>
       {isLogginActive == "login" && (
         <Login
           isLogginActive={isLogginActive}
@@ -47,17 +30,19 @@ export default () => {
           setIsLogginActive={setIsLogginActive}
         ></DemoUser>
       )}
-    </div>
+    </BackgroundStyle>
   );
 };
 
-// const BackgroundStyle = styled.li`
-//   color: tomato;
-//   border-color: tomato;
-//   background: papayawhip;
-//   width: 1500px;
-//   position: absolute important!;
-//   left: 0px;
-//   top: 0px;
-//   zindex: 2;
-// `;
+const BackgroundStyle = styled.div`
+  background-image: linear-gradient(to right, #4facfe 0%, #00bcd4 100%);
+  width: 100%;
+  height: 100%;
+  position: absolute !important;
+  top: 0 !important;
+  left: 0 !important;
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;

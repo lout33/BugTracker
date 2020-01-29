@@ -5,6 +5,8 @@ import { Link } from "@reach/router";
 import { backend_route } from "../../../GlobalVariables";
 import axios from "axios";
 import "./../../styles.css";
+import Swal from "sweetalert2";
+import { SuccesCenterTimer } from "../../../animations/Alerts";
 
 export function Table({ filteredArray }) {
   ////////////////////////////////////////////////////////////////////////////////////////////
@@ -57,23 +59,36 @@ export function Table({ filteredArray }) {
   //////////////////////////////////////////////////////
 
   const onDeleteTicketById = ticketId => {
-    axios
-      .post(
-        `${backend_route}/api/global/ticket/deleteTicketById`,
-        { ticketId: ticketId },
-        {
-          headers: { "auth-token": window.sessionStorage.getItem("token") }
-        }
-      )
-      .then(res => {
-        if (res.request.status === 200) {
-          console.log("ticket eliminado correctamente");
-          // me trae la lista de de tickets
-          setListTickets(res.data);
-        } else {
-          console.log("error pe chino");
-        }
-      });
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!"
+    }).then(result => {
+      if (result.value) {
+        axios
+          .post(
+            `${backend_route}/api/global/ticket/deleteTicketById`,
+            { ticketId: ticketId },
+            {
+              headers: { "auth-token": window.sessionStorage.getItem("token") }
+            }
+          )
+          .then(res => {
+            if (res.request.status === 200) {
+              console.log("ticket eliminado correctamente");
+              // me trae la lista de de tickets
+              setListTickets(res.data);
+              SuccesCenterTimer.fire();
+            } else {
+              console.log("error pe chino");
+            }
+          });
+      }
+    });
   };
   /////////////////////////////////////////////////////////////////////
 

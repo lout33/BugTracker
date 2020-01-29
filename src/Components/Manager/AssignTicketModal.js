@@ -2,6 +2,7 @@ import React, { useState, useEffect, useContext } from "react";
 import { Context } from "../../Context";
 import axios from "axios";
 import { backend_route } from "../../GlobalVariables";
+import { Toast } from "../../animations/Alerts";
 
 export default function AssignTicketModal() {
   const { listProyects, listTickets, setListTickets, user } = useContext(
@@ -42,19 +43,11 @@ export default function AssignTicketModal() {
         headers: { "auth-token": window.sessionStorage.getItem("token") }
       })
       .then(res => {
-        if (res.request.status === 200) {
-          // console.log(listTickets);
-          // let arrayTickets = [];
-          try {
-            setDevs(res.data);
-            console.log(res.data);
-          } catch (error) {
-            console.log(error);
-            // setListTickets([]);
-          }
-        } else {
-          console.log("error");
-        }
+        setDevs(res.data);
+        console.log(res.data);
+      })
+      .catch(err => {
+        console.log(err);
       });
   }, []);
 
@@ -89,12 +82,20 @@ export default function AssignTicketModal() {
         }
       )
       .then(res => {
-        if (res.request.status === 200) {
-          console.log(res.data);
-          setListTickets(res.data);
-        } else {
-          console.log("error pe chino");
-        }
+        Toast.fire({
+          icon: "success",
+          title: "Process executed with success"
+        });
+        console.log(res.data);
+        setListTickets(res.data);
+      })
+      .catch(err => {
+        console.log(err);
+
+        Toast.fire({
+          icon: "error",
+          title: "Process NOT executed with success"
+        });
       });
   };
   return (

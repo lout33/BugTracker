@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useContext } from "react";
 import { Context } from "../../Context";
+import { Toast } from "../../animations/Alerts";
 
 import axios from "axios";
 import { backend_route } from "../../GlobalVariables";
@@ -71,7 +72,7 @@ export function Comments({ props, commentsDetail, setCommentsDetail }) {
   }
   //////////////////////////////////////////////////////
 
-  const [message, setMessage] = useState([]);
+  const [message, setMessage] = useState("");
   const onHandleMessage = e => {
     e.preventDefault();
     setMessage(e.target.value);
@@ -95,11 +96,18 @@ export function Comments({ props, commentsDetail, setCommentsDetail }) {
       )
       .then(function(res) {
         // me llega los detalles de ONE Proyecto
-        // console.log(res.data);
-        // setTicketDetail(res.data);
+        Toast.fire({
+          icon: "success",
+          title: "Added comments with success"
+        });
         setCommentsDetail(res.data.comments);
+        setMessage("");
       })
       .catch(function(error) {
+        Toast.fire({
+          icon: "error",
+          title: "Erro! to add comment "
+        });
         console.log(error);
       });
   };

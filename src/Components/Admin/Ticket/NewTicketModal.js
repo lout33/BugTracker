@@ -2,6 +2,7 @@ import React, { useState, useEffect, useContext } from "react";
 import { Context } from "./../../../Context";
 import axios from "axios";
 import { backend_route } from "./../../../GlobalVariables";
+import { Toast } from "../../../animations/Alerts";
 
 export function NewTicketModal() {
   const {
@@ -46,15 +47,23 @@ export function NewTicketModal() {
         }
       )
       .then(res => {
-        if (res.request.status === 200) {
-          console.log("ticket creado correctamente");
-          // console.log(res.data);
-          // me llega una lista de todos los tickets
-          setListTickets(res.data);
-          setInput(initialFormState);
-        } else {
-          console.log("error pe chino");
-        }
+        console.log("ticket creado correctamente");
+        // console.log(res.data);
+        // me llega una lista de todos los tickets
+        setListTickets(res.data);
+        // setInput((initialFormState.description = ""));
+
+        Toast.fire({
+          icon: "success",
+          title: "Process executed with success"
+        });
+      })
+      .catch(err => {
+        console.log(err);
+        Toast.fire({
+          icon: "error",
+          title: "Process NOT executed with success"
+        });
       });
   };
 

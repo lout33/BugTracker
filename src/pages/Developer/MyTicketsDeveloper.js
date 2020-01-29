@@ -4,7 +4,8 @@ import axios from "axios";
 import Navbar from "../../Components/Navbar";
 import Sidebar from "../../Components/Sidebar";
 import { backend_route } from "./../../GlobalVariables";
-
+import { Link } from "@reach/router";
+import { Toast } from "./../../animations/Alerts";
 export default function MyTicketsDeveloper() {
   const { listTickets, setListTickets } = useContext(Context);
   const [loading, setloading] = useState(true);
@@ -46,35 +47,39 @@ export default function MyTicketsDeveloper() {
         }
       )
       .then(res => {
-        if (res.request.status === 200) {
-          try {
-            axios
-              .get(
-                `${backend_route}/api/developer/ticket/getTicketsByAssignedManager`,
-                {
-                  headers: {
-                    "auth-token": window.sessionStorage.getItem("token")
-                  }
-                }
-              )
-              .then(res => {
-                if (res.request.status === 200) {
-                  try {
-                    console.log(res.data);
-                    setListTickets(res.data);
-                  } catch (error) {
-                    console.log(error);
-                  }
-                } else {
-                  console.log("error pe chino");
-                }
-              });
-          } catch (error) {
-            console.log(error);
-          }
-        } else {
-          console.log("error pe chino");
-        }
+        Toast.fire({
+          icon: "success",
+          title: "Process executed with success"
+        });
+        axios
+          .get(
+            `${backend_route}/api/developer/ticket/getTicketsByAssignedManager`,
+            {
+              headers: {
+                "auth-token": window.sessionStorage.getItem("token")
+              }
+            }
+          )
+          .then(res => {
+            console.log(res.data);
+
+            setListTickets(res.data);
+          })
+          .catch(err => {
+            console.log(err);
+            Toast.fire({
+              icon: "error",
+              title: "Process NOT executed with success"
+            });
+          });
+      })
+      .catch(err => {
+        console.log(err);
+
+        Toast.fire({
+          icon: "error",
+          title: "Process NOT executed with success"
+        });
       });
   }, [status]);
 
@@ -155,7 +160,7 @@ export default function MyTicketsDeveloper() {
   //////////////////////////////////////////////////////
 
   return (
-    <div>
+    <div className="mt-3">
       <div className="content">
         <div className="container-fluid">
           <div className="card">
@@ -192,8 +197,9 @@ export default function MyTicketsDeveloper() {
                       <th>Assigned Developer</th>
                       <th>Priority</th>
                       <th>Status</th>
+                      <th>Details</th>
+
                       <th>Change Status</th>
-                      {/* <th>Details</th> */}
                     </tr>
                   </thead>
                   <tbody>
@@ -218,7 +224,11 @@ export default function MyTicketsDeveloper() {
                             </td>
                             <td> {ticket.priority}</td>
                             <td>{ticket.status}</td>
-
+                            <td class="text-primary">
+                              <Link to={`./details/${ticket._id}`}>
+                                details
+                              </Link>
+                            </td>
                             <td>
                               <select
                                 value={ticket.status}
@@ -252,11 +262,6 @@ export default function MyTicketsDeveloper() {
                                 </option>
                               </select>
                             </td>
-                            {/* <td class="text-primary">
-                                  <Link to={`./details/${ticket._id}`}>
-                                    details
-                                  </Link>
-                                </td> */}
                           </tr>
                         );
                       })

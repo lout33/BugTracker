@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useContext } from "react";
 import { Context } from "../../Context";
+import { Toast } from "../../animations/Alerts";
 
 import axios from "axios";
 import { backend_route } from "../../GlobalVariables";
@@ -72,7 +73,6 @@ export function Attachments({ props, imagesDetail, setImagesDetail }) {
   //////////////////////////////////////////////////////
 
   const URL_CLOUDARY = "https://api.cloudinary.com/v1_1/dv2q4mh6c/image/upload";
-
   const PRESET_CLOUDINARY = "eo7isizh";
   const onSendImage = e => {
     e.preventDefault();
@@ -81,6 +81,11 @@ export function Attachments({ props, imagesDetail, setImagesDetail }) {
     bodyFormData.append("upload_preset", PRESET_CLOUDINARY);
     // bodyFormData.append("imageDescription", imageDescription);
     console.log("data enviada");
+    Toast.fire({
+      icon: "info",
+      title: "Uploading images... one second please "
+    });
+    setImageDescription("");
 
     axios
       .post(URL_CLOUDARY, bodyFormData, {
@@ -113,15 +118,27 @@ export function Attachments({ props, imagesDetail, setImagesDetail }) {
             console.log(res.data);
             // setTicketDetail(res.data);
             setImagesDetail(res.data.image);
+            Toast.fire({
+              icon: "success",
+              title: "Added image with success"
+            });
           })
           .catch(function(error) {
             console.log(error);
+            Toast.fire({
+              icon: "error",
+              title: "Error! to add image "
+            });
           });
 
         // setTicketDetail(res.data);
       })
       .catch(function(error) {
         console.log(error);
+        Toast.fire({
+          icon: "error",
+          title: "Error! upload image please"
+        });
       });
   };
 
@@ -208,12 +225,12 @@ export function Attachments({ props, imagesDetail, setImagesDetail }) {
               <tbody>
                 {currentImagesForThisTicket.map((image, index) => {
                   return (
-                    <tr key={index}>
-                      <td>
+                    <tr key={index} className="">
+                      <td className="">
                         {/* <!-- Button trigger modal --> */}
                         <button
                           type="button"
-                          className="btn btn-info"
+                          className=" btn btn-info "
                           data-toggle="modal"
                           data-target={"#" + index}
                         >

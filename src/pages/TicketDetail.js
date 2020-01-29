@@ -122,11 +122,11 @@ export default props => {
                         </tr>
                         <tr>
                           <td>
-                            <h6> Created Type</h6>
+                            <h6> Created </h6>
                             <p>{ticketDetail.createdAt}</p>
                           </td>
                           <td>
-                            <h6> Updated Type</h6>
+                            <h6> Updated </h6>
                             <p>{ticketDetail.updatedAt}</p>
                           </td>
                         </tr>

@@ -2,6 +2,7 @@ import React, { useState, useEffect, useContext } from "react";
 import { Context } from "../../Context";
 import axios from "axios";
 import { backend_route } from "../../GlobalVariables";
+import { Toast } from "../../animations/Alerts";
 
 export function NewTicketModal() {
   const {
@@ -37,23 +38,17 @@ export function NewTicketModal() {
         headers: { "auth-token": window.sessionStorage.getItem("token") }
       })
       .then(res => {
-        if (res.request.status === 200) {
-          try {
-            setListProyects(res.data);
-            setloading(false);
-            console.log(res.data);
-          } catch (error) {
-            console.log(error);
-          }
-        } else {
-          console.log("error pe chino");
-        }
+        setListProyects(res.data);
+        setloading(false);
+        console.log(res.data);
+      })
+      .catch(err => {
+        console.log(err);
       });
   }, []);
 
   const handleCreateTicket = e => {
     e.preventDefault();
-    setInput(initialFormState);
 
     axios
       .post(
@@ -67,17 +62,22 @@ export function NewTicketModal() {
         }
       )
       .then(res => {
-        if (res.request.status === 200) {
-          console.log(res.data);
+        console.log(res.data);
 
-          console.log("ticket creado correctamente");
-          setListTickets(res.data);
-        } else {
-          console.log("error pe chino");
-        }
+        console.log("ticket creado correctamente");
+        setListTickets(res.data);
+
+        Toast.fire({
+          icon: "success",
+          title: "Process executed with success"
+        });
       })
       .catch(err => {
         console.log(err);
+        Toast.fire({
+          icon: "error",
+          title: "Process NOT executed with success"
+        });
       });
   };
   return (
@@ -149,15 +149,18 @@ export function NewTicketModal() {
                   className="form-control mb-4"
                   placeholder="Name"
                 />
-
-                <input
-                  type="text"
-                  // value={registro.email}
-                  name="description"
+                <textarea
+                  required={true}
+                  rows="4"
+                  cols="50"
+                  className="form-control  mb-4   "
+                  // value={message}
                   onChange={handleInputChange}
-                  className="form-control mb-4"
+                  name="description"
+                  type="text"
                   placeholder="Description"
-                />
+                ></textarea>
+
                 <div>
                   <h4>Priority </h4>
                   <select

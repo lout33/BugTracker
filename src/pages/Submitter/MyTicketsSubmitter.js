@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useContext } from "react";
 import { Context } from "../../Context";
 import axios from "axios";
+import { Link } from "@reach/router";
 
 import { backend_route } from "./../../GlobalVariables";
 import { NewTicketModal } from "../../Components/Submitter/NewTicketModal";
@@ -105,7 +106,7 @@ export default function MyTicketsSubmitter() {
   //////////////////////////////////////////////////////
 
   return (
-    <div>
+    <div className="mt-3">
       <div className="content">
         <div className="container-fluid">
           {/* LAYOUT */}
@@ -176,11 +177,11 @@ export default function MyTicketsSubmitter() {
                             <td> {ticket.type}</td>
                             <td> {ticket.createdAt}</td>
 
-                            {/* <td class="text-primary">
-                                  <Link to={`./details/${ticket._id}`}>
-                                    details
-                                  </Link>
-                                </td> */}
+                            <td class="text-primary">
+                              <Link to={`./details/${ticket._id}`}>
+                                details
+                              </Link>
+                            </td>
                           </tr>
                         );
                       })

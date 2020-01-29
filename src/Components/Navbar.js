@@ -15,7 +15,10 @@ export default function Navbar({ isLoading }) {
 
   return (
     <>
-      <nav className="navbar navbar-expand-lg  bg-secondary  navbar-absolute fixed-top navbartracker mb-3">
+      <nav
+        style={{ zIndex: 10 }}
+        className="navbar navbar-expand-lg bg-light   navbar-absolute fixed-top navbartracker mb-2 "
+      >
         <div className="container-fluid">
           <div className="navbar-wrapper">
             <div>

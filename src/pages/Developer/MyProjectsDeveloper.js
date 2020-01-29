@@ -31,7 +31,7 @@ export default function MyProjectsDeveloper() {
   }, []);
 
   return (
-    <div>
+    <div className="mt-3">
       <div className="content">
         <div className="container-fluid">
           <div class="card">

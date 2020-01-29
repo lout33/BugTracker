@@ -6,6 +6,8 @@ import { Link } from "@reach/router";
 import { CardTickets } from "../../Components/Admin/Ticket/CardTickets";
 import { backend_route } from "../../GlobalVariables";
 import { NewTicketModal } from "../../Components/Admin/Ticket/NewTicketModal";
+import { Toast } from "../../animations/Alerts";
+
 export default () => {
   const {
     listProyects,
@@ -24,19 +26,11 @@ export default () => {
         headers: { "auth-token": window.sessionStorage.getItem("token") }
       })
       .then(res => {
-        if (res.request.status === 200) {
-          // console.log(listTickets);
-          // let arrayTickets = [];
-          try {
-            console.log(res.data);
-            setDevs(res.data);
-          } catch (error) {
-            console.log(error);
-            // setListTickets([]);
-          }
-        } else {
-          console.log("error pe chino");
-        }
+        console.log(res.data);
+        setDevs(res.data);
+      })
+      .catch(error => {
+        console.log(error.response);
       });
   }, []);
 
@@ -72,14 +66,25 @@ export default () => {
         if (res.request.status === 200) {
           console.log(res.data);
           setListTickets(res.data);
+          Toast.fire({
+            icon: "success",
+            title: "Process executed with success"
+          });
         } else {
-          console.log("error pe chino");
+          console.log("error");
         }
+      })
+      .catch(err => {
+        console.log(err);
+        Toast.fire({
+          icon: "error",
+          title: "Process NOT executed with success"
+        });
       });
   };
 
   return (
-    <div>
+    <div className="mt-3">
       <div className="content">
         <div className="container-fluid">
           <div>

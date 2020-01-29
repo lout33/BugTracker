@@ -15,10 +15,8 @@ import MyTicketsManager from "./pages/Manager/MyTicketsManager";
 
 import MyProjectsDeveloper from "./pages/Developer/MyProjectsDeveloper";
 import MyTicketsDeveloper from "./pages/Developer/MyTicketsDeveloper";
-
 import "./App.css";
 import NotFound from "./pages/NotFound";
-
 import { backend_route } from "./GlobalVariables";
 
 import Navbar from "./Components/Navbar";

@@ -50,7 +50,7 @@ export default props => {
   useEffect(() => {
     axios
       .post(
-        `${backend_route}/api/admin/project/getProjectById`,
+        `${backend_route}/api/global/project/getProjectById`,
         { projectId: props.projectId },
         {
           params: {},
@@ -68,7 +68,7 @@ export default props => {
       });
   }, []);
   return (
-    <div>
+    <div className="mt-3">
       <div className="content">
         <div className="container-fluid">
           <div className="row">

@@ -30,7 +30,8 @@ const Provider = ({ children }) => {
     },
     removeAuth: () => {
       setIsAuth(false);
-      navigate("/getin");
+      // navigate("/getin");
+      navigate("/");
       window.sessionStorage.removeItem("token");
       window.sessionStorage.removeItem("active");
       window.location.reload();

@@ -1,7 +1,8 @@
 import React, { useState, useEffect, useContext } from "react";
 import { Context } from "../../Context";
 import axios from "axios";
-import { Toast } from "../../animations/Toast";
+import { Toast } from "../../animations/Alerts";
+
 import { backend_route } from "../../GlobalVariables";
 
 import { CardPersonnel } from "../../Components/Admin/ManageRole/CardPerssonel";
@@ -37,18 +38,23 @@ export default function ManageRoleAssignment() {
       .then(function(res) {
         console.log(res.data);
         setMyPersonel(res.data);
+
         Toast.fire({
           icon: "success",
-          title: "Create user with success"
+          title: "Assigned user with success"
         });
       })
       .catch(function(error) {
         console.log(error);
+        Toast.fire({
+          icon: "error",
+          title: "Erro! to assign user"
+        });
       });
   };
 
   return (
-    <div>
+    <div className="mt-3">
       <div className="content">
         <div className="container-fluid">
           <div className="row">

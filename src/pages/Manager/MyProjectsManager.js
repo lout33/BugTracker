@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useContext } from "react";
 import { Context } from "../../Context";
 import axios from "axios";
+import { Link } from "@reach/router";
 
 import { backend_route } from "./../../GlobalVariables";
 
@@ -94,7 +95,7 @@ export default function MyProjectsManager() {
   //////////////////////////////////////////////////////
 
   return (
-    <div>
+    <div className="mt-3">
       <div className="content">
         <div className="container-fluid">
           <div class="card">
@@ -144,10 +145,10 @@ export default function MyProjectsManager() {
                             <td>{project.name}</td>
                             <td> {project.description}</td>
                             {/* <td class="text-primary">
-                                  <Link to={`./details/${project._id}`}>
-                                    details
-                                  </Link>
-                                </td> */}
+                              <Link to={`./details/${project._id}`}>
+                                details
+                              </Link>
+                            </td> */}
                           </tr>
                         );
                       })

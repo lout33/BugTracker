@@ -1,9 +1,13 @@
 import React, { useState, useEffect, useContext } from "react";
 import { Context } from "../../Context";
 import axios from "axios";
+import { Link } from "@reach/router";
 
 import { backend_route } from "./../../GlobalVariables";
 import AssignTicketModal from "../../Components/Manager/AssignTicketModal";
+import { Toast } from "../../animations/Alerts";
+import Swal from "sweetalert2";
+import { SuccesCenterTimer } from "../../animations/Alerts";
 
 export default function MyTicketsManager() {
   const { listProyects, listTickets, setListTickets, user } = useContext(
@@ -11,22 +15,34 @@ export default function MyTicketsManager() {
   );
 
   const onDeleteTicketById = ticketId => {
-    axios
-      .post(
-        `${backend_route}/api/global/ticket/deleteTicketById`,
-        { ticketId: ticketId },
-        {
-          headers: { "auth-token": window.sessionStorage.getItem("token") }
-        }
-      )
-      .then(res => {
-        if (res.request.status === 200) {
-          console.log("ticket eliminado correctamente");
-          setListTickets(res.data);
-        } else {
-          console.log("error pe chino");
-        }
-      });
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!"
+    }).then(result => {
+      if (result.value) {
+        axios
+          .post(
+            `${backend_route}/api/global/ticket/deleteTicketById`,
+            { ticketId: ticketId },
+            {
+              headers: { "auth-token": window.sessionStorage.getItem("token") }
+            }
+          )
+          .then(res => {
+            console.log("ticket eliminado correctamente");
+            setListTickets(res.data);
+            SuccesCenterTimer.fire();
+          })
+          .catch(err => {
+            console.log(err);
+          });
+      }
+    });
   };
 
   ////////////////////////Card-General////////////////////////
@@ -101,7 +117,7 @@ export default function MyTicketsManager() {
   //////////////////////////////////////////////////////
 
   return (
-    <div>
+    <div className="mt-3">
       <div className="content">
         <div className="container-fluid">
           {/* LAYOUT */}
@@ -146,6 +162,7 @@ export default function MyTicketsManager() {
                     <th className="font-weight-bold">status</th>
                     <th className="font-weight-bold">type</th>
                     <th className="font-weight-bold">createdAt</th>
+                    <th className="font-weight-bold">details</th>
                   </thead>
                   <tbody>
                     {currentListOfTickets.map((ticket, index) => {
@@ -162,14 +179,10 @@ export default function MyTicketsManager() {
                           <td> {ticket.status}</td>
                           <td> {ticket.type}</td>
                           <td> {ticket.createdAt}</td>
-
                           <td class="text-primary">
-                            {/* <Link to={`./details/${ticket._id}`}>
-                                  details
-                                </Link>
-                                <br />
-                                <Link to={`./edit/${ticket._id}`}>edit</Link>
-                                <br /> */}
+                            <Link to={`./details/${ticket._id}`}>details</Link>
+                          </td>
+                          <td class="text-primary">
                             <button
                               className="btn btn-danger btn-sm"
                               onClick={() => {

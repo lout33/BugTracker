@@ -1,4 +1,4 @@
-export const backend_route = "http://localhost:3000";
+export const backend_route = "https://bugtracker-rest-api.herokuapp.com";
 
-// https://nodebugtracker2.herokuapp.com
-// http://localhost:3000
+//
+//http://localhost:3000

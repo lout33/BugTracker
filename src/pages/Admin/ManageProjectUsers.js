@@ -2,6 +2,7 @@ import React, { useState, useEffect, useContext } from "react";
 import { Context } from "../../Context";
 
 import axios from "axios";
+import { Toast } from "../../animations/Alerts";
 
 import { backend_route } from "../../GlobalVariables";
 import { CardPersonnel } from "../../Components/Admin/ManageProject/CardPerssonel";
@@ -48,10 +49,6 @@ export default function ManageProjectUsers() {
 
   const onSubmitAssignToProject = e => {
     e.preventDefault();
-    // "adminId":"5e10c31f3062a710ce57b17a",
-    // "projectId":"5e10cc8b867c70113f0db410",
-    // "userId":"5e10d1038dcaad1174a08811"
-
     axios
       .post(
         `${backend_route}/api/admin/project/assignUsersToProject`,
@@ -67,15 +64,23 @@ export default function ManageProjectUsers() {
       )
       .then(function(res) {
         console.log(res.data);
+        Toast.fire({
+          icon: "success",
+          title: "Assigned to project with success"
+        });
         setMyPersonel(res.data);
       })
       .catch(function(error) {
         console.log(error);
+        Toast.fire({
+          icon: "error",
+          title: "Erro! to assign "
+        });
       });
   };
 
   return (
-    <div>
+    <div className="mt-3">
       <div className="content">
         <div className="container-fluid">
           <div className="row">

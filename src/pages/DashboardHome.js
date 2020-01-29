@@ -229,7 +229,7 @@ export default () => {
           {/* LAYOUT */}
           {/* YOUR CONTENT  */}
           <div className="row d-flex flex-row justify-content-around">
-            <div className="col-md-6  p-3 mb-2  bg-white ">
+            <div className="col-md-6  p-3 mb-2  bg-white overflow-hidden">
               <div>
                 <h3>Tickets by Priority</h3>
                 <h4>All the tickets classify by priority</h4>
@@ -266,7 +266,7 @@ export default () => {
                 </div>
               </div>
             </div>
-            <div className="col-md-6 p-3 mb-2   bg-white ">
+            <div className="col-md-6 p-3 mb-2   bg-white overflow-hidden">
               {/* //tickets by type  DONA */}
               <div>
                 <h3>Tickets by Type</h3>
@@ -301,7 +301,7 @@ export default () => {
               </div>
             </div>
 
-            <div className="col-md-6 p-3 mb-2  bg-white">
+            <div className="col-md-6 p-3 mb-2  bg-white overflow-hidden">
               <div>
                 <h3>Tickets By Status</h3>
                 <h4>All the tickets classify by status</h4>
@@ -338,11 +338,11 @@ export default () => {
               </div>
             </div>
 
-            <div className="col-md-6 p-3 mb-2  bg-white">
+            <div className="col-md-6 p-3 mb-2  bg-white overflow-hidden">
               {/* //tickets by assigned developer DONA */}
               <div>
-                <h3>Tickets by Type</h3>
-                <h4>All the tickets classify by type</h4>
+                <h3>Tickets assigned to Developers</h3>
+                <h4>All the tickets assigned to a developer</h4>
               </div>
               <div className="card bg-warning">
                 <div className="card-header card-header-info">

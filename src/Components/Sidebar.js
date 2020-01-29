@@ -31,15 +31,17 @@ export default function Sidebar() {
   };
 
   return (
-    <div className="sidebar" data-color="orange" data-background-color="white">
+    <div className="sidebar" data-color="orange">
       <div className="d-flex flex-row logo">
         <div className="d-flex flex-row">
           <div>
             <img src={require("./../images/logo.png")} width={"80px"} alt="" />
           </div>
-          <div>
+          <div className="overflow-hidden w-75">
             <h3>Welcome</h3>
-            <h4 className="font-weight-normal text-capitalize">{user.name}</h4>
+            <h4 className="font-weight-normal text-capitalize overflow-hidden">
+              {user.name}
+            </h4>
           </div>
         </div>
       </div>
@@ -110,7 +112,7 @@ export default function Sidebar() {
               to="/myProjects"
             >
               <i className="material-icons">library_books</i>
-              <p>My projets </p>
+              <p>My projects </p>
             </Link>
           </li>
           <li

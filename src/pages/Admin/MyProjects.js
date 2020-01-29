@@ -6,6 +6,8 @@ import axios from "axios";
 import { useForm } from "react-hook-form";
 import { backend_route } from "../../GlobalVariables";
 import { CardProjects } from "../../Components/Admin/Project/CardProjects";
+import { Toast } from "../../animations/Alerts";
+
 export default () => {
   // Validation --------------------------------------------->
   const { register, handleSubmit, watch, errors } = useForm();
@@ -13,22 +15,22 @@ export default () => {
     Context
   );
 
-  const initialFormState = {
-    name: "",
-    description: ""
-  };
-  const [input, setInput] = useState(initialFormState);
+  // const initialFormState = {
+  //   name: "",
+  //   description: ""
+  // };
+  // const [input, setInput] = useState(initialFormState);
 
-  const handleInputChange = event => {
-    const { name, value } = event.target;
-    setInput({ ...input, [name]: value }); //anade el name y surname mas al adduser
-  };
+  // const handleInputChange = event => {
+  //   const { name, value } = event.target;
+  //   setInput({ ...input, [name]: value }); //anade el name y surname mas al adduser
+  // };
 
-  const onSubmit = data => {
+  const onSubmit = (data, e) => {
     // e.preventDefault();
     // if (!input) return;
-    setInput(initialFormState);
-
+    // setInput(initialFormState);
+    e.target.reset();
     axios
       .post(`${backend_route}/api/admin/project/createProject`, data, {
         params: {},
@@ -37,6 +39,10 @@ export default () => {
       .then(res => {
         if (res.request.status === 200) {
           console.log("proyecto creado correctamente");
+          Toast.fire({
+            icon: "success",
+            title: "Process executed with success"
+          });
           // me trae la lista de de proyectos
           console.log(res.data);
           setListProyects(res.data);
@@ -47,7 +53,7 @@ export default () => {
   };
 
   return (
-    <div>
+    <div className="mt-3">
       <div className="content">
         <div className="container-fluid">
           <div>
@@ -92,8 +98,8 @@ export default () => {
                       <div className=" mb-4">
                         <input
                           type="text"
-                          value={input.name}
-                          onChange={handleInputChange}
+                          // value={input.name}
+                          // onChange={handleInputChange}
                           name="name"
                           className="form-control"
                           placeholder="Name"
@@ -116,8 +122,8 @@ export default () => {
                       <div className=" mb-4">
                         <input
                           type="text"
-                          value={input.description}
-                          onChange={handleInputChange}
+                          // value={input.description}
+                          // onChange={handleInputChange}
                           name="description"
                           className="form-control "
                           placeholder="Description"

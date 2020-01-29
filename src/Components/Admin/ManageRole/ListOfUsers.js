@@ -10,7 +10,7 @@ export function ListOfUsers({ setPickedPersonel, pickedPersonel }) {
 
   return (
     <div>
-      <h4> List of users</h4>
+      <h4> List of users to assign role</h4>
       <small>Select:</small>
       <select
         value={pickedPersonel}

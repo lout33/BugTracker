@@ -74,7 +74,7 @@ export default function DemoUser({ isLogginActive, setIsLogginActive }) {
             <h4>Admin</h4>
           </button>
           <button
-            className="btn btn-info"
+            className="btn btn-warning"
             onClick={() => {
               loginAs("manager");
             }}
@@ -93,7 +93,7 @@ export default function DemoUser({ isLogginActive, setIsLogginActive }) {
         </div>
         <div>
           <button
-            className="btn btn-info"
+            className="btn btn-warning"
             onClick={() => {
               loginAs("developer");
             }}
@@ -128,14 +128,14 @@ export default function DemoUser({ isLogginActive, setIsLogginActive }) {
           </button>
         </div>
       </div>
-      <div>
-        <p className="font-italic text-dark d-flex justify-content-end">
+      <div className="d-flex justify-content-center w-100">
+        <p className="font-italic text-light ">
           Have an account?
           <a
             onClick={() => {
               setIsLogginActive("login");
             }}
-            className=" border-bottom text-info  font-weight-bold"
+            className=" border-bottom text-light  font-weight-bold"
           >
             Login...
           </a>

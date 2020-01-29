@@ -2,6 +2,8 @@ import React, { useState, useContext, useEffect } from "react";
 import { Context } from "../../../Context";
 
 import Swal from "sweetalert2";
+import { SuccesCenterTimer } from "../../../animations/Alerts";
+
 import { backend_route } from "../../../GlobalVariables";
 import axios from "axios";
 import "./../../styles.css";
@@ -46,47 +48,55 @@ export function Table({ filteredArray }) {
   }, []);
 
   const onDeletePersonal = personId => {
-    axios
-      .post(
-        `${backend_route}/api/admin/personnel/deletePersonalById`,
-        {
-          personnelId: personId
-        },
-        {
-          params: {},
-          headers: { "auth-token": window.sessionStorage.getItem("token") }
-        }
-      )
-      .then(res => {
-        console.log("perssonel eliminado correctamente");
-        console.log(res.data);
-
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!"
+    }).then(result => {
+      if (result.value) {
         axios
-          .get(`${backend_route}/api/admin/personnel/myPersonel`, {
-            headers: { "auth-token": window.sessionStorage.getItem("token") }
-          })
-          .then(res => {
-            if (res.request.status === 200) {
-              // me trae la lista de de proyectos
-              console.log("lista de mis personal");
-              console.log(res.data);
-              setMyPersonel(res.data);
-            } else {
-              console.log("error pe chino");
+          .post(
+            `${backend_route}/api/admin/personnel/deletePersonalById`,
+            {
+              personnelId: personId
+            },
+            {
+              params: {},
+              headers: { "auth-token": window.sessionStorage.getItem("token") }
             }
+          )
+          .then(res => {
+            console.log("perssonel eliminado correctamente");
+            console.log(res.data);
+
+            axios
+              .get(`${backend_route}/api/admin/personnel/myPersonel`, {
+                headers: {
+                  "auth-token": window.sessionStorage.getItem("token")
+                }
+              })
+              .then(res => {
+                if (res.request.status === 200) {
+                  // me trae la lista de de proyectos
+                  console.log("lista de mis personal");
+                  console.log(res.data);
+                  setMyPersonel(res.data);
+                  SuccesCenterTimer.fire();
+                } else {
+                  console.log("error pe chino");
+                }
+              })
+              .catch(err => {
+                console.log(err);
+              });
           })
-          .catch(err => {
-            console.log(err);
-          });
-      })
-      .catch(err => {
-        Swal.fire({
-          title: "Succes",
-          text: "Do you want to continue",
-          icon: "succes",
-          confirmButtonText: "No so cool Cool"
-        });
-      });
+          .catch(err => {});
+      }
+    });
   };
 
   return (

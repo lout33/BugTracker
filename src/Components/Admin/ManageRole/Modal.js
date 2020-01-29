@@ -2,7 +2,8 @@ import React, { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
 import axios from "axios";
 import { backend_route } from "../../../GlobalVariables";
-import { Toast } from "../../../animations/Toast";
+import { Toast } from "../../../animations/Alerts";
+
 import { Context } from "../../../Context";
 
 export function Modal() {
@@ -16,7 +17,9 @@ export function Modal() {
   };
   const [registro, setRegistro] = useState(initialFormStateTwo);
 
-  const onSubmit = data => {
+  const onSubmit = (data, e) => {
+    e.target.reset();
+
     axios
       .post(`${backend_route}/api/admin/ticket/addPersonel`, data, {
         params: {},
@@ -25,6 +28,7 @@ export function Modal() {
       .then(res => {
         // me devuelve mi lista de personles
         console.log(res.data);
+
         setMyPersonel(res.data);
         Toast.fire({
           icon: "success",
@@ -32,10 +36,11 @@ export function Modal() {
         });
       })
       .catch(err => {
-        console.log(err);
+        console.log(err.response.data);
+
         Toast.fire({
           icon: "error",
-          title: "Error to create user"
+          title: "Error! to create user"
         });
       });
     console.log(registro);
@@ -108,8 +113,7 @@ export function Modal() {
                     ref={register({
                       required: true,
                       minLength: 6,
-                      // "[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$
-                      pattern: /^[a-zA-Z0-9-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/
+                      pattern: /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
                     })}
                   />
                   {errors.email && errors.email.type === "required" && (

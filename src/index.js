@@ -1,7 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import "./material-dashboard.css";
-import "./index.css";
 import App from "./App";
 import Context from "./Context";
 
