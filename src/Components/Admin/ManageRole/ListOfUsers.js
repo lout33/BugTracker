@@ -1,5 +1,6 @@
 import React, { useContext } from "react";
 import { Context } from "./../../../Context";
+import { useTranslation } from "react-i18next";
 
 export function ListOfUsers({ setPickedPersonel, pickedPersonel }) {
   const { myPersonel } = useContext(Context);
@@ -7,11 +8,12 @@ export function ListOfUsers({ setPickedPersonel, pickedPersonel }) {
   const handleOptionChangePersonel = e => {
     setPickedPersonel(e.target.value);
   };
+  const { t } = useTranslation();
 
   return (
     <div>
-      <h4> List of users to assign role</h4>
-      <small>Select:</small>
+      <h4>{t("List of users to assign role")} </h4>
+      <small>{t("Select")}</small>
       <select
         value={pickedPersonel}
         onChange={handleOptionChangePersonel}

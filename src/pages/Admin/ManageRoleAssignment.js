@@ -8,10 +8,13 @@ import { backend_route } from "../../GlobalVariables";
 import { CardPersonnel } from "../../Components/Admin/ManageRole/CardPerssonel";
 import { Modal } from "../../Components/Admin/ManageRole/Modal";
 import { ListOfUsers } from "../../Components/Admin/ManageRole/ListOfUsers";
+import { useTranslation } from "react-i18next";
+
 export default function ManageRoleAssignment() {
   // const { register, handleSubmit, watch, errors } = useForm();
 
   const { myPersonel, setMyPersonel, user, isAuth } = useContext(Context);
+  const { t } = useTranslation();
 
   /////////////////////////////////////////////////////
   const [pickedPersonel, setPickedPersonel] = useState(undefined);
@@ -60,7 +63,7 @@ export default function ManageRoleAssignment() {
           <div className="row">
             <div className="col-md-4">
               <div>
-                <h4> Create New User or Personnel</h4>
+                <h4> {t("Create New User or Personnel")}</h4>
                 {/* <!-- Button trigger modal --> */}
                 <button
                   type="button"
@@ -68,7 +71,7 @@ export default function ManageRoleAssignment() {
                   data-toggle="modal"
                   data-target="#exampleModal"
                 >
-                  Add Personnel
+                  {t("Add Personnel")}
                 </button>
                 <Modal></Modal>
               </div>
@@ -79,15 +82,15 @@ export default function ManageRoleAssignment() {
               ></ListOfUsers>
               <br />
               <div>
-                <h4>Select role to assign</h4>
+                <h4> {t("Select role to assign")}</h4>
                 <select
                   value={role}
                   onChange={handleOptionChange}
                   className="w-100 custom-select"
                 >
-                  <option value="developer">developer</option>
-                  <option value="submitter">submitter</option>
-                  <option value="manager">manager</option>
+                  <option value="developer"> {t("developer")}</option>
+                  <option value="submitter">{t("submitter")}</option>
+                  <option value="manager">{t("manager")}</option>
                 </select>
                 <div>
                   <br />
@@ -96,7 +99,7 @@ export default function ManageRoleAssignment() {
                     className="w-100  btn btn-warning"
                     type="button"
                   >
-                    Assign Role
+                    {t("Assign Role")}
                   </button>
                 </div>
               </div>

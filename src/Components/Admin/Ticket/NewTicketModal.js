@@ -3,8 +3,11 @@ import { Context } from "./../../../Context";
 import axios from "axios";
 import { backend_route } from "./../../../GlobalVariables";
 import { Toast } from "../../../animations/Alerts";
+import { useTranslation } from "react-i18next";
 
 export function NewTicketModal() {
+  const { t } = useTranslation();
+
   const {
     listProyects,
     listTickets,
@@ -95,7 +98,7 @@ export function NewTicketModal() {
         <div className="modal-content">
           <div className="modal-header">
             <h4 className="modal-title" id="exampleModalLabel">
-              NEW TICKET
+              {t("New Ticket")}
             </h4>
             <button
               type="button"
@@ -108,7 +111,7 @@ export function NewTicketModal() {
           </div>
           <div className="modal-body">
             <div>
-              <h4>Select project to attach </h4>
+              <h4>{t("Select project to attach")}</h4>
               <select
                 value={input.projectId}
                 name="projectId"
@@ -130,7 +133,7 @@ export function NewTicketModal() {
               </select>
             </div>
             <form className=" border border-light p-5">
-              <h4> Create your new ticket </h4>
+              <h4> {t("Create your new ticket")}</h4>
 
               <input
                 type="text"
@@ -150,31 +153,37 @@ export function NewTicketModal() {
                 placeholder="Description"
               />
               <div>
-                <h4>Priority </h4>
+                <h4> {t("Priority")}</h4>
                 <select
                   value={input.priority}
                   name="priority"
                   onChange={handleInputChange}
                   className="w-100 custom-select"
                 >
-                  <option value="low">low</option>
-                  <option value="medium">medium</option>
-                  <option value="high">high</option>
-                  <option value="urgent">urgent</option>
+                  <option value="low">{t("low")}</option>
+                  <option value="medium">{t("medium")}</option>
+                  <option value="high">{t("high")}</option>
+                  <option value="urgent">{t("urgent")}</option>
                 </select>
               </div>
 
               <div>
-                <h4>Type </h4>
+                <h4> {t("Type")} </h4>
                 <select
                   value={input.type}
                   name="type"
                   onChange={handleInputChange}
                   className="w-100 custom-select"
                 >
-                  <option value="bug">Bug/Error</option>
-                  <option value="feature">Feature/Request</option>
-                  <option value="inquiry">InquiryQuestion</option>
+                  <option value="bug">
+                    {t("Bug")}/{t("Error")}
+                  </option>
+                  <option value="feature">
+                    {t("Feature")}/{t("Request")}
+                  </option>
+                  <option value="inquiry">
+                    {t("Inquiry")}/{t("Question")}
+                  </option>
                 </select>
               </div>
 
@@ -185,7 +194,7 @@ export function NewTicketModal() {
                 className="btn btn-warning"
                 data-dismiss="modal"
               >
-                Create ticket and Close
+                {t("Create ticket and Close")}
               </button>
             </form>
           </div>
@@ -195,7 +204,7 @@ export function NewTicketModal() {
               className="btn btn-danger"
               data-dismiss="modal"
             >
-              Close
+              {t("Close")}
             </button>
           </div>
         </div>

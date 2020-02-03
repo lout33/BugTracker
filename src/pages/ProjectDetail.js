@@ -7,8 +7,11 @@ import { navigate } from "@reach/router";
 import { backend_route } from "./../GlobalVariables";
 import CardAssignedPersonnel from "../Components/ProjectDetail/CardAssignedPersonnel";
 import CardTicketsForThisProject from "../Components/ProjectDetail/CardTicketsForThisProject";
+import { useTranslation } from "react-i18next";
 
 export default props => {
+  const { t } = useTranslation();
+
   const [proyectoDetail, setProyectoDetail] = useState({});
 
   const [listTicketsForThisProject, setListTicketsForThisProject] = useState(
@@ -75,14 +78,17 @@ export default props => {
             <div className="col-md-12">
               <div className="card">
                 <div className="card-header card-header-info">
-                  <h4 className="card-title ">Details for this project</h4>
+                  <h4 className="card-title ">
+                    {t("Details for this project")}{" "}
+                  </h4>
 
                   <button
                     onClick={onNavigateToProjects}
                     class=" btn btn-link  btn-sm  text-white"
                   >
                     <i class="material-icons">arrow_back</i>
-                    Back to list
+
+                    {t("Back to list")}
                   </button>
                   {/* <button>Edit</button> */}
                 </div>
@@ -96,11 +102,11 @@ export default props => {
                       <tbody id="tbody">
                         <tr>
                           <td>
-                            <h4>Project Name</h4>
+                            <h4>{t("Project Name")}</h4>
                             <p>{proyectoDetail.name}</p>
                           </td>
                           <td>
-                            <h4> Project Description</h4>
+                            <h4>{t("Project Description")} </h4>
                             <p>{proyectoDetail.description}</p>
                           </td>
                         </tr>
@@ -124,3 +130,5 @@ export default props => {
     </div>
   );
 };
+
+// export default ProjectDetail;

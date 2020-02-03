@@ -7,8 +7,11 @@ import { CardTickets } from "../../Components/Admin/Ticket/CardTickets";
 import { backend_route } from "../../GlobalVariables";
 import { NewTicketModal } from "../../Components/Admin/Ticket/NewTicketModal";
 import { Toast } from "../../animations/Alerts";
+import { useTranslation } from "react-i18next";
 
-export default () => {
+const MyTickets = () => {
+  const { t } = useTranslation();
+
   const {
     listProyects,
     listTickets,
@@ -88,20 +91,20 @@ export default () => {
       <div className="content">
         <div className="container-fluid">
           <div>
-            <h4> Create New Ticket </h4>
+            <h4>{t("Create New Ticket")} </h4>
             <button
               type="button"
               className="btn btn-warning"
               data-toggle="modal"
               data-target="#exampleModal"
             >
-              New Ticket
+              {t("New Ticket")}
             </button>
             <NewTicketModal></NewTicketModal>
           </div>
           <hr />
           <div>
-            <h4> Assign Ticket to Developer</h4>
+            <h4> {t("Assign Ticket to Developer")} </h4>
 
             {/* <!-- Button trigger modal --> */}
             <button
@@ -110,7 +113,7 @@ export default () => {
               data-toggle="modal"
               data-target="#exampleModal2"
             >
-              Assign
+              {t("Assign")}
             </button>
             {/* <!-- Modal --> */}
             <div
@@ -125,7 +128,7 @@ export default () => {
                 <div className="modal-content">
                   <div className="modal-header">
                     <h4 className="modal-title" id="exampleModalLabel">
-                      ASSIGN TICKET TO DEV
+                      {t("Assign Ticket To Dev")}
                     </h4>
                     <button
                       type="button"
@@ -138,7 +141,7 @@ export default () => {
                   </div>
                   <div className="modal-body">
                     <div>
-                      <h4>Pick your ticket</h4>
+                      <h4>{t("Pick your ticket")}</h4>
 
                       <select
                         value={pickedTicket}
@@ -163,7 +166,7 @@ export default () => {
                     </div>
                     <br />
                     <div>
-                      <h4>Pick your dev</h4>
+                      <h4>{t("Pick your dev")}</h4>
 
                       <select
                         value={pickedDeveloper}
@@ -194,7 +197,7 @@ export default () => {
                       className="btn btn-warning"
                       data-dismiss="modal"
                     >
-                      Assing and close
+                      {t("Assing and close")}
                     </button>
                   </div>
                   <div className="modal-footer">
@@ -203,7 +206,7 @@ export default () => {
                       className="btn btn-danger"
                       data-dismiss="modal"
                     >
-                      Close
+                      {t("Close")}
                     </button>
                   </div>
                 </div>
@@ -217,3 +220,4 @@ export default () => {
     </div>
   );
 };
+export default MyTickets;

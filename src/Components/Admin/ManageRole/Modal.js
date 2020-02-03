@@ -3,12 +3,14 @@ import { useForm } from "react-hook-form";
 import axios from "axios";
 import { backend_route } from "../../../GlobalVariables";
 import { Toast } from "../../../animations/Alerts";
+import { useTranslation } from "react-i18next";
 
 import { Context } from "../../../Context";
 
 export function Modal() {
   const { setMyPersonel } = useContext(Context);
   const { register, handleSubmit, errors } = useForm();
+  const { t } = useTranslation();
 
   const initialFormStateTwo = {
     name: "",
@@ -62,7 +64,7 @@ export function Modal() {
           <div className="modal-content">
             <div className="modal-header">
               <h5 className="modal-title" id="exampleModalLabel">
-                Add Personnel
+                {t("Add Personnel")}
               </h5>
               <button
                 type="button"
@@ -168,7 +170,7 @@ export function Modal() {
                   type="submit"
                   className="btn btn-warning"
                 >
-                  Add Personnel
+                  {t("Add Personnel")}
                 </button>
               </form>
             </div>
@@ -178,7 +180,7 @@ export function Modal() {
                 className="btn btn-danger"
                 data-dismiss="modal"
               >
-                Close
+                {t("Close")}
               </button>
             </div>
           </div>

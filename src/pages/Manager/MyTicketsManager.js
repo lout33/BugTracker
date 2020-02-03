@@ -8,8 +8,10 @@ import AssignTicketModal from "../../Components/Manager/AssignTicketModal";
 import { Toast } from "../../animations/Alerts";
 import Swal from "sweetalert2";
 import { SuccesCenterTimer } from "../../animations/Alerts";
+import { useTranslation } from "react-i18next";
 
 export default function MyTicketsManager() {
+  const { t } = useTranslation();
   const { listProyects, listTickets, setListTickets, user } = useContext(
     Context
   );
@@ -122,14 +124,16 @@ export default function MyTicketsManager() {
         <div className="container-fluid">
           {/* LAYOUT */}
           {/* YOUR CONTENT  */}
-          <h4> Assign Ticket to Developer</h4>
+          <h4>{t("Assign Ticket to Developer")} </h4>
           <AssignTicketModal></AssignTicketModal>
           <hr />
           {/* {aca va la lista hermosa} */}
           <div class="card">
             <div class="card-header card-header-info">
-              <h4 class="card-title ">Your Tickets</h4>
-              <p class="card-category">All your Tickets in your database</p>
+              <h4 class="card-title ">{t("Your Tickets")}</h4>
+              <p class="card-category">
+                {t("All your Tickets in your database")}
+              </p>
             </div>
             <div class="card-body">
               <div class="table-responsive">
@@ -155,14 +159,16 @@ export default function MyTicketsManager() {
                 {/* ///////////////////Search/////////////////////////// */}
                 <table class="table ">
                   <thead className="font-weight-bold">
-                    <th className="font-weight-bold">title</th>
-                    <th className="font-weight-bold">projectName</th>
-                    <th className="font-weight-bold">assignedDeveloper</th>
-                    <th className="font-weight-bold">priority</th>
-                    <th className="font-weight-bold">status</th>
-                    <th className="font-weight-bold">type</th>
-                    <th className="font-weight-bold">createdAt</th>
-                    <th className="font-weight-bold">details</th>
+                    <th className="font-weight-bold">{t("title")}</th>
+                    <th className="font-weight-bold">{t("projectName")}</th>
+                    <th className="font-weight-bold">
+                      {t("assignedDeveloper")}
+                    </th>
+                    <th className="font-weight-bold">{t("priority")}</th>
+                    <th className="font-weight-bold">{t("status")}</th>
+                    <th className="font-weight-bold">{t("type")}</th>
+                    <th className="font-weight-bold">{t("createdAt")}</th>
+                    <th className="font-weight-bold">{t("details")}</th>
                   </thead>
                   <tbody>
                     {currentListOfTickets.map((ticket, index) => {
@@ -180,7 +186,9 @@ export default function MyTicketsManager() {
                           <td> {ticket.type}</td>
                           <td> {ticket.createdAt}</td>
                           <td class="text-primary">
-                            <Link to={`./details/${ticket._id}`}>details</Link>
+                            <Link to={`./details/${ticket._id}`}>
+                              {t("details")}
+                            </Link>
                           </td>
                           <td class="text-primary">
                             <button
@@ -189,7 +197,7 @@ export default function MyTicketsManager() {
                                 onDeleteTicketById(ticket._id);
                               }}
                             >
-                              Delete
+                              {t("Delete")}
                               <i className="material-icons ml-1">
                                 delete_forever
                               </i>

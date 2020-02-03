@@ -3,6 +3,7 @@ import { Context } from "../../../Context";
 
 import Swal from "sweetalert2";
 import { SuccesCenterTimer } from "../../../animations/Alerts";
+import { useTranslation } from "react-i18next";
 
 import { backend_route } from "../../../GlobalVariables";
 import axios from "axios";
@@ -10,6 +11,7 @@ import "./../../styles.css";
 
 export function Table({ filteredArray }) {
   //// LOGIG PAGINATION////////////////////////////////////
+  const { t } = useTranslation();
 
   const [currentPage, setCurrentPage] = useState(1);
   const [postsPerPage, setPostsPerPage] = useState(5);
@@ -104,9 +106,9 @@ export function Table({ filteredArray }) {
       <table className="table ">
         <thead>
           <tr>
-            <th className="font-weight-bold">Username</th>
-            <th className="font-weight-bold">Email</th>
-            <th className="font-weight-bold">Role</th>
+            <th className="font-weight-bold">{t("Username")}</th>
+            <th className="font-weight-bold">{t("Email")}</th>
+            <th className="font-weight-bold">{t("Role")}</th>
           </tr>
         </thead>
         <tbody>
@@ -125,7 +127,8 @@ export function Table({ filteredArray }) {
                       onDeletePersonal(person._id);
                     }}
                   >
-                    Delete
+                    {t("Delete")}
+
                     <i className="material-icons ml-2  ">delete_forever</i>
                   </button>
                 </td>
@@ -146,7 +149,9 @@ export function Table({ filteredArray }) {
                       </a>
                     </li>
                   ))}
-                  <span className="ml-1 mt-2 font-weight-light">...pages</span>
+                  <span className="ml-1 mt-2 font-weight-light">
+                    ... {t("pages")}
+                  </span>
                 </ul>
               </nav>
             </td>

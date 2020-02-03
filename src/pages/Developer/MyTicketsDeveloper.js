@@ -6,7 +6,11 @@ import Sidebar from "../../Components/Sidebar";
 import { backend_route } from "./../../GlobalVariables";
 import { Link } from "@reach/router";
 import { Toast } from "./../../animations/Alerts";
+import "./../../App.css";
+import { useTranslation } from "react-i18next";
 export default function MyTicketsDeveloper() {
+  const { t } = useTranslation();
+
   const { listTickets, setListTickets } = useContext(Context);
   const [loading, setloading] = useState(true);
 
@@ -165,8 +169,10 @@ export default function MyTicketsDeveloper() {
         <div className="container-fluid">
           <div className="card">
             <div className="card-header card-header-info">
-              <h4 className="card-title ">Your Tickets</h4>
-              <p className="card-category">All your Tickets in your database</p>
+              <h4 className="card-title ">{t("Your Tickets")}</h4>
+              <p className="card-category">
+                {t("All your Tickets in your database")}
+              </p>
             </div>
             <div className="card-body">
               <div className="table-responsive">
@@ -193,13 +199,12 @@ export default function MyTicketsDeveloper() {
                 <table className="table ">
                   <thead className="font-weight-bold">
                     <tr>
-                      <th>Name</th>
-                      <th>Assigned Developer</th>
-                      <th>Priority</th>
-                      <th>Status</th>
-                      <th>Details</th>
-
-                      <th>Change Status</th>
+                      <th>{t("Name")}</th>
+                      <th>{t("Assigned Developer")}</th>
+                      <th>{t("Priority")}</th>
+                      <th>{t("Status")}</th>
+                      <th>{t("Details")}</th>
+                      <th>{t("Change Status")}</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -224,9 +229,9 @@ export default function MyTicketsDeveloper() {
                             </td>
                             <td> {ticket.priority}</td>
                             <td>{ticket.status}</td>
-                            <td class="text-primary">
+                            <td className="text-secondary">
                               <Link to={`./details/${ticket._id}`}>
-                                details
+                                <td>{t("details")}</td>
                               </Link>
                             </td>
                             <td>
@@ -234,31 +239,31 @@ export default function MyTicketsDeveloper() {
                                 value={ticket.status}
                                 name={ticket._id}
                                 onChange={handleStatusChange}
-                                className="w-50 btn btn-warning btn-sm list-group "
+                                className={`w-75 btn btn-warning  btn-sm list-group`}
                               >
                                 <option
                                   className={
-                                    "list-group-item list-group-item-action text-dark"
+                                    "optionDanger list-group-item list-group-item-action  b "
                                   }
                                   value="informado"
                                 >
-                                  Informado
+                                  {t("Informado")}
                                 </option>
                                 <option
                                   className={
-                                    "list-group-item list-group-item-action "
+                                    "optionWarning list-group-item list-group-item-action   "
                                   }
                                   value="inprogress"
                                 >
-                                  In Progress
+                                  {t("In Progress")}
                                 </option>
                                 <option
                                   className={
-                                    "list-group-item list-group-item-action "
+                                    "optionInfo list-group-item list-group-item-action   "
                                   }
                                   value="closed"
                                 >
-                                  Closed
+                                  {t("Closed")}
                                 </option>
                               </select>
                             </td>

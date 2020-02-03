@@ -1,8 +1,11 @@
 import React, { useState, useContext, useEffect } from "react";
+import { useTranslation } from "react-i18next";
 
 export default function CardTicketsForThisProject({
   listTicketsForThisProject
 }) {
+  const { t } = useTranslation();
+
   ////////////////////////Card-General////////////////////////
   const [filteredArray, setFilteredArray] = useState([]);
   ////////////////////////Card-General////////////////////////
@@ -79,8 +82,10 @@ export default function CardTicketsForThisProject({
   return (
     <div className="card">
       <div className="card-header card-header-info">
-        <h4 className="card-title ">Tickets for This project</h4>
-        <p className="card-category">All history information for this ticket</p>
+        <h4 className="card-title "> {t("Tickets for This project")} </h4>
+        <p className="card-category">
+          {t("All your tickets for this project")}
+        </p>
       </div>
       <div className="card-body">
         <div className="table-responsive">
@@ -107,11 +112,11 @@ export default function CardTicketsForThisProject({
           <table className="table ">
             <thead className="">
               <tr>
-                <th className="font-weight-bold">Title</th>
-                <th className="font-weight-bold">Developer</th>
-                <th className="font-weight-bold">Submitter</th>
-                <th className="font-weight-bold">Status</th>
-                <th className="font-weight-bold">Created at</th>
+                <th className="font-weight-bold">{t("Title")}</th>
+                <th className="font-weight-bold">{t("Developer")}</th>
+                <th className="font-weight-bold">{t("Submitter")}</th>
+                <th className="font-weight-bold">{t("Status")}</th>
+                <th className="font-weight-bold">{t("Created at")}</th>
               </tr>
             </thead>
             <tbody>

@@ -7,8 +7,11 @@ import axios from "axios";
 import "./../../styles.css";
 import Swal from "sweetalert2";
 import { SuccesCenterTimer } from "../../../animations/Alerts";
+import { useTranslation } from "react-i18next";
 
 export function Table({ filteredArray }) {
+  const { t } = useTranslation();
+
   ////////////////////////////////////////////////////////////////////////////////////////////
   const {
     myPersonel,
@@ -116,9 +119,9 @@ export function Table({ filteredArray }) {
       <table className="table">
         <thead className=" ">
           <tr>
-            <th className="font-weight-bold">Project</th>
-            <th className="font-weight-bold">Description</th>
-            <th className="font-weight-bold">Details</th>
+            <th className="font-weight-bold">{t("Project")}</th>
+            <th className="font-weight-bold">{t("Description")}</th>
+            <th className="font-weight-bold">{t("Details")}</th>
           </tr>
         </thead>
         <tbody>
@@ -128,7 +131,7 @@ export function Table({ filteredArray }) {
                 <td>{project.name}</td>
                 <td> {project.description}</td>
                 <td className="">
-                  <Link to={`./details/${project._id}`}>details</Link>
+                  <Link to={`./details/${project._id}`}>{t("details")}</Link>
                 </td>
                 <td className="">
                   <button
@@ -138,7 +141,8 @@ export function Table({ filteredArray }) {
                       onDeleteProjectById(project._id);
                     }}
                   >
-                    Delete
+                    {t("Delete")}
+
                     <i className="material-icons h-100 w-100">delete_forever</i>
                   </button>
                 </td>

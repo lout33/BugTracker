@@ -7,8 +7,11 @@ import Swal from "sweetalert2";
 import { backend_route } from "../../../GlobalVariables";
 import axios from "axios";
 import "./../../styles.css";
+import { useTranslation } from "react-i18next";
 
 export function Table({ filteredArray }) {
+  const { t } = useTranslation();
+
   ////////////////////////////////////////////////////////////////////////////////////////////
   const { myPersonel, setMyPersonel } = useContext(Context);
   ////////////////////////////////////////////////////////////////////////////////////////////
@@ -94,9 +97,9 @@ export function Table({ filteredArray }) {
       <table className="table">
         <thead className=" ">
           <tr>
-            <th className="font-weight-bold">Username</th>
-            <th className="font-weight-bold">Email</th>
-            <th className="font-weight-bold">Projects Assigned To</th>
+            <th className="font-weight-bold">{t("Username")}</th>
+            <th className="font-weight-bold">{t("Email")}</th>
+            <th className="font-weight-bold">{t("User assigned to")}</th>
           </tr>
         </thead>
         <tbody>

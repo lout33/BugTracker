@@ -6,8 +6,11 @@ import { useForm } from "react-hook-form";
 import "../styles.css";
 import { backend_route } from "../../GlobalVariables";
 import { EmailExistAlert } from "./../../animations/Alerts";
+import { useTranslation } from "react-i18next";
+
 export default function Register({ isLogginActive, setIsLogginActive }) {
   const { activateAuth } = useContext(Context);
+  const { t, i18n } = useTranslation();
 
   const { register, handleSubmit, errors } = useForm();
   const onSubmit = (data, e) => {
@@ -44,7 +47,7 @@ export default function Register({ isLogginActive, setIsLogginActive }) {
         className=" border border-light p-5 bg-light  rounded "
         onSubmit={handleSubmit(onSubmit)}
       >
-        <p className="h4 mb-4">Sign In</p>
+        <p className="h4 mb-4">{t("Register")}</p>
 
         <div className="mb-4">
           <input
@@ -127,18 +130,18 @@ export default function Register({ isLogginActive, setIsLogginActive }) {
         </div>
 
         <button type="submit" className="btn btn-info btn-block mb-4 ">
-          Sign In
+          {t("Sign In")}
         </button>
 
         <p className="font-italic text-dark d-flex justify-content-end">
-          Have an account?
+          ¿{t("Have an account")}?_
           <a
             onClick={() => {
               setIsLogginActive("login");
             }}
             className=" border-bottom text-info font-weight-bold  "
           >
-            Login...
+            {t("Login")}
           </a>
         </p>
       </form>

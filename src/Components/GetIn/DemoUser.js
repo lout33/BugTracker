@@ -4,6 +4,7 @@ import axios from "axios";
 import { navigate } from "@reach/router";
 
 import { backend_route } from "../../GlobalVariables";
+import { useTranslation } from "react-i18next";
 
 async function handleDemos(email, password) {
   const res = await axios.post(`${backend_route}/api/auth/login`, {
@@ -15,6 +16,8 @@ async function handleDemos(email, password) {
 
 export default function DemoUser({ isLogginActive, setIsLogginActive }) {
   const { activateAuth } = useContext(Context);
+  const { t, i18n } = useTranslation();
+
   const loginAs = async user => {
     try {
       if (user === "admin") {
@@ -71,7 +74,8 @@ export default function DemoUser({ isLogginActive, setIsLogginActive }) {
                 alt=""
               />
             </figure>
-            <h4>Admin</h4>
+
+            <h4>{t("Admin")}</h4>
           </button>
           <button
             className="btn btn-warning"
@@ -88,7 +92,7 @@ export default function DemoUser({ isLogginActive, setIsLogginActive }) {
                 alt=""
               />
             </figure>
-            <h4> Project Manager</h4>
+            <h4>{t("Project Manager")}</h4>
           </button>
         </div>
         <div>
@@ -107,7 +111,7 @@ export default function DemoUser({ isLogginActive, setIsLogginActive }) {
                 alt=""
               />
             </figure>
-            <h4>Developer</h4>
+            <h4>{t("Developer")}</h4>
           </button>
           <button
             className="btn btn-warning"
@@ -124,20 +128,21 @@ export default function DemoUser({ isLogginActive, setIsLogginActive }) {
                 alt=""
               />
             </figure>
-            <h4>Submitter</h4>
+
+            <h4>{t("Submitter")}</h4>
           </button>
         </div>
       </div>
       <div className="d-flex justify-content-center w-100">
         <p className="font-italic text-light ">
-          Have an account?
+          ¿{t("Have an account")}?_
           <a
             onClick={() => {
               setIsLogginActive("login");
             }}
             className=" border-bottom text-light  font-weight-bold"
           >
-            Login...
+            {t("Login")}
           </a>
         </p>
       </div>

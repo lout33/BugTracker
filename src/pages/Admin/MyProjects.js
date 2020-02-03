@@ -1,14 +1,16 @@
 import React, { useState, useEffect, useContext } from "react";
 import { Context } from "../../Context";
 import axios from "axios";
-
+import { useTranslation } from "react-i18next";
 // Validation --------------------------------------------->
 import { useForm } from "react-hook-form";
 import { backend_route } from "../../GlobalVariables";
 import { CardProjects } from "../../Components/Admin/Project/CardProjects";
 import { Toast } from "../../animations/Alerts";
 
-export default () => {
+const MyProjects = () => {
+  const { t } = useTranslation();
+
   // Validation --------------------------------------------->
   const { register, handleSubmit, watch, errors } = useForm();
   const { listProyects, setListProyects, user, setMyPersonel } = useContext(
@@ -57,14 +59,14 @@ export default () => {
       <div className="content">
         <div className="container-fluid">
           <div>
-            <h4> Create New Project </h4>
+            <h4> {t("Create New Project")} </h4>
             <button
               type="button"
               className="btn btn-warning"
               data-toggle="modal"
               data-target="#exampleModal"
             >
-              New Project
+              {t("New Project")}
             </button>
             {/* <!-- Modal --> */}
             <div
@@ -79,7 +81,7 @@ export default () => {
                 <div className="modal-content">
                   <div className="modal-header">
                     <h5 className="modal-title" id="exampleModalLabel">
-                      Create New Project
+                      {t("Create New Project")}
                     </h5>
                     <button
                       type="button"
@@ -139,7 +141,7 @@ export default () => {
                         className="btn btn-warning"
                         type="submit"
                       >
-                        Create project and close
+                        {t("Create project")}
                       </button>
                     </form>
                   </div>
@@ -149,7 +151,7 @@ export default () => {
                       className="btn btn-danger"
                       data-dismiss="modal"
                     >
-                      Close
+                      {t("Close")}
                     </button>
                   </div>
                 </div>
@@ -160,8 +162,8 @@ export default () => {
           <CardProjects></CardProjects>
         </div>
       </div>
-      {/* </div>
-      </div> */}
     </div>
   );
 };
+
+export default MyProjects;

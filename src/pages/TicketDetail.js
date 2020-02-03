@@ -7,8 +7,11 @@ import { backend_route } from "./../GlobalVariables";
 import { Comments } from "../Components/TIcketDetail/Comments";
 import { Historial } from "../Components/TIcketDetail/Historial";
 import { Attachments } from "../Components/TIcketDetail/Attachments";
+import { useTranslation } from "react-i18next";
 
 export default props => {
+  const { t } = useTranslation();
+
   const [ticketDetail, setTicketDetail] = useState({});
   const [imagesDetail, setImagesDetail] = useState([]);
   const [commentsDetail, setCommentsDetail] = useState([]);
@@ -58,14 +61,17 @@ export default props => {
             <div className="col-md-6 ">
               <div className="card">
                 <div className="card-header card-header-info">
-                  <h4 className="card-title ">Details for this ticket</h4>
+                  <h4 className="card-title ">
+                    {t("Details for this ticket")}
+                  </h4>
                   {/* <p className="card-category">All about your ticket</p> */}
                   <button
                     onClick={onNavigateToTickets}
                     class="btn btn-link  btn-sm   text-white"
                   >
                     <i class="material-icons">arrow_back</i>
-                    Back to list
+
+                    {t("Back to list")}
                   </button>
                 </div>
                 <div className="card-body">
@@ -74,25 +80,25 @@ export default props => {
                       <tbody id="tbody">
                         <tr>
                           <td>
-                            <h6>Ticket Title</h6>
+                            <h6> {t("Ticket Title")}</h6>
                             <p>{ticketDetail.name}</p>
                           </td>
                           <td>
-                            <h6> Ticket Description</h6>
+                            <h6>{t("Ticket Description")} </h6>
                             <p>{ticketDetail.description}</p>
                             {/* anadir la description en el bakencd */}
                           </td>
                         </tr>
                         <tr>
                           <td>
-                            <h6> Assigned Developer</h6>
+                            <h6>{t("Assigned Developer")} </h6>
                             <p>
                               {ticketDetail.assignedDeveloper &&
                                 ticketDetail.assignedDeveloper.devName}
                             </p>
                           </td>
                           <td>
-                            <h6> Submiter</h6>
+                            <h6>{t("Submiter")} </h6>
                             {ticketDetail.submitter && (
                               <p>{ticketDetail.submitter.name}</p>
                             )}
@@ -100,33 +106,33 @@ export default props => {
                         </tr>
                         <tr>
                           <td>
-                            <h6> Project</h6>
+                            <h6>{t("Project")} </h6>
                             <p>{ticketDetail.byProjectName}</p>
                             {/* A que project pertenece ,lo anado enel back */}
                           </td>
                           <td>
-                            <h6> Ticket Priority</h6>
+                            <h6>{t("Ticket Priority")} </h6>
                             <p>{ticketDetail.priority}</p>
                           </td>
                         </tr>
 
                         <tr>
                           <td>
-                            <h6> Ticket Status</h6>
+                            <h6>{t("Ticket Status")} </h6>
                             <p>{ticketDetail.status}</p>
                           </td>
                           <td>
-                            <h6> Ticket Type</h6>
+                            <h6>{t("Ticket Type")} </h6>
                             <p>{ticketDetail.type}</p>
                           </td>
                         </tr>
                         <tr>
                           <td>
-                            <h6> Created </h6>
+                            <h6>{t("Created")} </h6>
                             <p>{ticketDetail.createdAt}</p>
                           </td>
                           <td>
-                            <h6> Updated </h6>
+                            <h6>{t("Updated")} </h6>
                             <p>{ticketDetail.updatedAt}</p>
                           </td>
                         </tr>
@@ -164,3 +170,5 @@ export default props => {
     </div>
   );
 };
+
+// export default TicketDetail;

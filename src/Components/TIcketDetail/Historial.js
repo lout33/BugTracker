@@ -1,6 +1,9 @@
 import React, { useState, useEffect, useContext } from "react";
+import { useTranslation } from "react-i18next";
 
 export function Historial({ historiesDetail, setHistoriesDetail }) {
+  const { t } = useTranslation();
+
   ////////////////////////Card-General////////////////////////
   const [filteredArray, setFilteredArray] = useState([]);
   ////////////////////////Card-General////////////////////////
@@ -72,8 +75,10 @@ export function Historial({ historiesDetail, setHistoriesDetail }) {
   return (
     <div class="card">
       <div class="card-header card-header-info">
-        <h4 class="card-title ">Tickets History</h4>
-        <p class="card-category">All history information for this ticket</p>
+        <h4 class="card-title "> {t("Tickets History")} </h4>
+        <p class="card-category">
+          {t("All history information for this ticket")}
+        </p>
       </div>
       <div class="card-body">
         <div class="table-responsive">
@@ -100,10 +105,10 @@ export function Historial({ historiesDetail, setHistoriesDetail }) {
           <table class="table ">
             <thead class=" ">
               <tr>
-                <th className="font-weight-bold">Property</th>
-                <th className="font-weight-bold">Old Value</th>
-                <th className="font-weight-bold">New Value</th>
-                <th className="font-weight-bold">Data Changed</th>
+                <th className="font-weight-bold">{t("Property")}</th>
+                <th className="font-weight-bold">{t("Old Value")}</th>
+                <th className="font-weight-bold">{t("New Value")}</th>
+                <th className="font-weight-bold">{t("Data Changed")}</th>
               </tr>
             </thead>
             <tbody>

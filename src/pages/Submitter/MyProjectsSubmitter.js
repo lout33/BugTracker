@@ -4,8 +4,11 @@ import axios from "axios";
 import Navbar from "../../Components/Navbar";
 import Sidebar from "../../Components/Sidebar";
 import { backend_route } from "./../../GlobalVariables";
+import { useTranslation } from "react-i18next";
 
 export default function MyProjectsSubmitter() {
+  const { t } = useTranslation();
+
   const { listProyects, setListProyects } = useContext(Context);
 
   const [loading, setloading] = useState(true);
@@ -96,11 +99,13 @@ export default function MyProjectsSubmitter() {
     <div className="mt-3">
       <div className="content">
         <div className="container-fluid">
-          <div>List of projects</div>
+          <div> {t("List of projects")}</div>
           <div class="card">
             <div class="card-header card-header-info">
-              <h4 class="card-title ">Your Projects</h4>
-              <p class="card-category">All your projects in your database</p>
+              <h4 class="card-title ">{t("Your Projects")}</h4>
+              <p class="card-category">
+                {t("All your projects in your database")}
+              </p>
             </div>
             <div class="card-body">
               <div class="table-responsive">
@@ -126,8 +131,8 @@ export default function MyProjectsSubmitter() {
                 {/* ///////////////////Search/////////////////////////// */}
                 <table class="table ">
                   <thead className="font-weight-bold">
-                    <th>Username</th>
-                    <th>Description</th>
+                    <th>{t("Username")}</th>
+                    <th>{t("Description")}</th>
                     {/* <th>Details</th> */}
                   </thead>
                   <tbody>

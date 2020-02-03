@@ -1,9 +1,14 @@
 import React, { useContext } from "react";
 import { Context } from "./../Context";
 import "./styles.css";
-export default function Navbar({ isLoading }) {
-  const { typeUser, removeAuth } = useContext(Context);
+import { useTranslation } from "react-i18next";
 
+export default ({ isLoading }) => {
+  const { typeUser, removeAuth } = useContext(Context);
+  const { t, i18n } = useTranslation();
+  const changeLanguage = lng => {
+    i18n.changeLanguage(lng);
+  };
   try {
     var btnRemoveAuth = document.getElementById("removeAuth");
     btnRemoveAuth.addEventListener("click", () => {
@@ -21,9 +26,9 @@ export default function Navbar({ isLoading }) {
       >
         <div className="container-fluid">
           <div className="navbar-wrapper">
-            <div>
-              <h5 className="text-secondary">
-                Logged in as:
+            <div className="d-flex justify-content-center align-items-center">
+              <h5 className="text-secondary m-0">
+                {t("Logged in as")} :
                 <span className="text-dark text-capitalize font-weight-normal">
                   {typeUser}
                 </span>
@@ -46,15 +51,49 @@ export default function Navbar({ isLoading }) {
             <span className="navbar-toggler-icon icon-bar"></span>
             <span className="navbar-toggler-icon icon-bar"></span>
           </button>
+
           <div className="collapse navbar-collapse justify-content-end">
             <ul className="navbar-nav">
+              <div class="btn-group" role="group">
+                <button
+                  id="btnGroupDrop1"
+                  type="button"
+                  class="btn btn-secondary dropdown-toggle"
+                  data-toggle="dropdown"
+                  aria-haspopup="true"
+                  aria-expanded="false"
+                >
+                  <img
+                    src={require("./../images/idioms.png")}
+                    width="20px"
+                    alt=""
+                    className="pr-1"
+                  />
+                  Lenguages
+                </button>
+                <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+                  <button
+                    class="dropdown-item bg-light"
+                    onClick={() => changeLanguage("en")}
+                  >
+                    <span className="text-dark">English</span>
+                  </button>
+                  <button
+                    class="dropdown-item bg-light"
+                    onClick={() => changeLanguage("es")}
+                  >
+                    <span className="text-dark">Español</span>
+                  </button>
+                </div>
+              </div>
+
               <button
                 type="submit"
                 onClick={removeAuth}
                 className=" btn btn-danger w-100"
                 id="removeAuth"
               >
-                Log out
+                {t("Log out")}
               </button>
             </ul>
           </div>
@@ -62,4 +101,4 @@ export default function Navbar({ isLoading }) {
       </nav>
     </>
   );
-}
+};

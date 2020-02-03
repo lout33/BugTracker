@@ -8,6 +8,7 @@ import Context from "./Context";
 import "material-dashboard/assets/js/material-dashboard.js";
 import "material-dashboard/assets/js/core/bootstrap-material-design.min.js";
 
+import "./i18n";
 ReactDOM.render(
   <Context.Provider>
     <App />

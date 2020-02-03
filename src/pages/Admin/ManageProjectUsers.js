@@ -6,8 +6,11 @@ import { Toast } from "../../animations/Alerts";
 
 import { backend_route } from "../../GlobalVariables";
 import { CardPersonnel } from "../../Components/Admin/ManageProject/CardPerssonel";
+import { useTranslation } from "react-i18next";
 
 export default function ManageProjectUsers() {
+  const { t } = useTranslation();
+
   const {
     listProyects,
     setListProyects,
@@ -87,8 +90,8 @@ export default function ManageProjectUsers() {
             <div className="col-md-4">
               <form>
                 <div>
-                  <h4> List of projects</h4>
-                  <small>Select:</small>
+                  <h4>{t("List of projects")}</h4>
+                  <small>{t("Select")}:</small>
                   <select
                     value={pickedProject}
                     onChange={handleOptionChangeProject}
@@ -110,8 +113,8 @@ export default function ManageProjectUsers() {
                 </div>
                 <br />
                 <div>
-                  <h4>List of my perssonel</h4>
-                  <small>Select:</small>
+                  <h4>{t("List of my perssonel")}</h4>
+                  <small>{t("Select")}:</small>
 
                   <select
                     value={pickedPersonel}
@@ -138,7 +141,7 @@ export default function ManageProjectUsers() {
                   className="w-100  btn btn-warning"
                   type="submit"
                 >
-                  Assign Project
+                  {t("Assign Project")}
                 </button>
                 {/* <input type="submit" placeholder="AssignProject" /> */}
                 {/* onSubmit={onSubmitAssignToProject} */}

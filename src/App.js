@@ -19,8 +19,12 @@ import "./App.css";
 import NotFound from "./pages/NotFound";
 import { backend_route } from "./GlobalVariables";
 
-import Navbar from "./Components/Navbar";
-import Sidebar from "./Components/Sidebar";
+// import Navbar from "./Components/Navbar";
+// import Sidebar from "./Components/Sidebar";
+
+const Navbar = lazy(() => import("./Components/Navbar"));
+const Sidebar = lazy(() => import("./Components/Sidebar"));
+
 const DashboardHome = lazy(() => import("./pages/DashboardHome"));
 const GetIn = lazy(() => import("./pages/GetIn"));
 const MyProjects = lazy(() => import("./pages/Admin/MyProjects"));
@@ -28,6 +32,14 @@ const ProjectDetail = lazy(() => import("./pages/ProjectDetail"));
 const MyTickets = lazy(() => import("./pages/Admin/MyTickets"));
 const TicketDetail = lazy(() => import("./pages/TicketDetail"));
 const TicketEdit = lazy(() => import("./pages/TicketEdit"));
+
+// import GetIn from "./pages/GetIn";
+// import DashboardHome from "./pages/DashboardHome";
+// import MyProjects from "./pages/Admin/MyProjects";
+// import ProjectDetail from "./pages/ProjectDetail";
+// import MyTickets from "./pages/Admin/MyTickets";
+// import TicketDetail from "./pages/TicketDetail";
+// import TicketEdit from "./pages/TicketEdit";
 
 function App(props) {
   const { isAuth, setIsAuth, setUser, typeUser, setTypeUser } = useContext(
@@ -66,12 +78,22 @@ function App(props) {
       })
       .catch(function(error) {
         console.log(error);
+        console.log("token invalido");
       });
   }, [isAuth]);
 
   return (
-    <Suspense fallback={<div>Loading...</div>}>
-      {/* LAYOUT */}
+    <Suspense
+      fallback={
+        <div>
+          <img
+            className="spinner"
+            src={require("./images/loading.gif")}
+            alt=""
+          />
+        </div>
+      }
+    >
       <div className="wrapper">
         <Sidebar></Sidebar>
         <div className="main-panel">

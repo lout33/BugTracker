@@ -4,8 +4,11 @@ import axios from "axios";
 import { Link } from "@reach/router";
 
 import { backend_route } from "./../../GlobalVariables";
+import { useTranslation } from "react-i18next";
 
 export default function MyProjectsManager() {
+  const { t } = useTranslation();
+
   const { listProyects, setListProyects, user, setMyPersonel } = useContext(
     Context
   );
@@ -100,8 +103,10 @@ export default function MyProjectsManager() {
         <div className="container-fluid">
           <div class="card">
             <div class="card-header card-header-info">
-              <h4 class="card-title ">Your Projects</h4>
-              <p class="card-category">All your projects in your database</p>
+              <h4 class="card-title ">{t("Your Projects")} </h4>
+              <p class="card-category">
+                {t("All your projects in your database")}
+              </p>
             </div>
             <div class="card-body">
               <div class="table-responsive">
@@ -127,8 +132,8 @@ export default function MyProjectsManager() {
                 {/* ///////////////////Search/////////////////////////// */}
                 <table class="table ">
                   <thead className="font-weight-bold">
-                    <th>Username</th>
-                    <th>Description</th>
+                    <th>{t("Username")}</th>
+                    <th>{t("Description")}</th>
                     {/* <th>Details</th> */}
                   </thead>
                   <tbody>

@@ -1,9 +1,11 @@
 import React, { useState, useContext, useEffect } from "react";
 import { backend_route } from "../../GlobalVariables";
 import axios from "axios";
+import { useTranslation } from "react-i18next";
 
 export default function CardAssignedPersonnel({ props }) {
   //////////////////////////Get Assigned Personel for this project/////////////////
+  const { t } = useTranslation();
 
   const [personelForThisProject, setPersonelForThisProject] = useState([]);
 
@@ -98,8 +100,10 @@ export default function CardAssignedPersonnel({ props }) {
   return (
     <div className="card">
       <div className="card-header card-header-info">
-        <h4 className="card-title ">Assigned Personel</h4>
-        <p className="card-category">All your comments for this tickets</p>
+        <h4 className="card-title ">{t("Assigned Personel")} </h4>
+        <p className="card-category">
+          {t("All your personnel for this project")}{" "}
+        </p>
       </div>
       <div className="card-body">
         <div className="table-responsive">
@@ -126,9 +130,9 @@ export default function CardAssignedPersonnel({ props }) {
           <table className="table ">
             <thead className="">
               <tr>
-                <th className="font-weight-bold">Username</th>
-                <th className="font-weight-bold">Email</th>
-                <th className="font-weight-bold">Role </th>
+                <th className="font-weight-bold">{t("Username")}</th>
+                <th className="font-weight-bold">{t("Email")}</th>
+                <th className="font-weight-bold">{t("Role")} </th>
               </tr>
             </thead>
             <tbody>

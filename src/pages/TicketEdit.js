@@ -6,8 +6,11 @@ import axios from "axios";
 
 import { backend_route } from "./../GlobalVariables";
 import { SuccesCenterTimer, ErrorCenterTimer } from "./../animations/Alerts";
+
+import { useTranslation } from "react-i18next";
 export default props => {
   // props.ticketId
+  const { t } = useTranslation();
 
   useEffect(() => {
     axios
@@ -84,13 +87,14 @@ export default props => {
             <div class="col-md-8">
               <div class="card">
                 <div class="card-header card-header-info">
-                  <h4 class="card-title ">Edit Ticket</h4>
+                  <h4 class="card-title ">{t("Edit Ticket")} </h4>
                   <button
                     onClick={onNavigateToTickets}
                     class="btn btn-link  btn-sm   text-white"
                   >
                     <i class="material-icons">arrow_back</i>
-                    Back to list
+
+                    {t("Back to list")}
                   </button>
                   {/* <p class="card-category">Change Ticket Properties</p> */}
                 </div>
@@ -100,7 +104,7 @@ export default props => {
                       <tbody id="tbody">
                         <tr>
                           <td>
-                            <h4>Ticket Title</h4>
+                            <h4>{t("Ticket Title")}</h4>
                             <input
                               type="text"
                               value={ticketToEdit.name}
@@ -111,7 +115,7 @@ export default props => {
                             />
                           </td>
                           <td>
-                            <h4>Ticket Description</h4>
+                            <h4>{t("Ticket Description")}</h4>
 
                             <input
                               type="text"
@@ -126,11 +130,11 @@ export default props => {
                         <br />
                         <tr>
                           <td>
-                            <h4>Project</h4>
+                            <h4>{t("Project")}</h4>
                             <p>{ticketToEdit.byProjectName}</p>
                           </td>
                           <td>
-                            <h4> Assigned Developer</h4>
+                            <h4> {t("Assigned Developer")}</h4>
 
                             <p>
                               {ticketToEdit.assignedDeveloper &&
@@ -141,7 +145,7 @@ export default props => {
                         <br />
                         <tr>
                           <td>
-                            <h4>Ticket Priority</h4>
+                            <h4>{t("Ticket Priority")}</h4>
 
                             <select
                               value={ticketToEdit.priority}
@@ -149,39 +153,49 @@ export default props => {
                               onChange={handleInputChange}
                               className="w-100 custom-select"
                             >
-                              <option value="low">low</option>
-                              <option value="medium">medium</option>
-                              <option value="high">high</option>
-                              <option value="urgent">urgent</option>
+                              <option value="low">{t("low")}</option>
+                              <option value="medium">{t("medium")}</option>
+                              <option value="high">{t("high")}</option>
+                              <option value="urgent">{t("urgent")}</option>
                             </select>
                           </td>
                           <td>
-                            <h4>Ticket Status</h4>
+                            <h4>{t("Ticket Status")}</h4>
                             <select
                               value={ticketToEdit.status}
                               name="status"
                               onChange={handleInputChange}
                               className="w-100 custom-select"
                             >
-                              <option value="informado">Informado</option>
-                              <option value="inprogress">In Progress</option>
-                              <option value="closed">Closed</option>
+                              <option value="informado">
+                                {t("Informado")}
+                              </option>
+                              <option value="inprogress">
+                                {t("In Progress")}
+                              </option>
+                              <option value="closed">{t("Closed")}</option>
                             </select>
                           </td>
                         </tr>
                         <br />
                         <tr>
                           <td>
-                            <h4>Ticket Type</h4>
+                            <h4>{t("Ticket Type")}</h4>
                             <select
                               value={ticketToEdit.type}
                               name="type"
                               onChange={handleInputChange}
                               className="w-100 custom-select"
                             >
-                              <option value="bug">Bug/Error</option>
-                              <option value="feature">Feature/Request</option>
-                              <option value="inquiry">InquiryQuestion</option>
+                              <option value="bug">
+                                {t("Bug")}/{t("Error")}
+                              </option>
+                              <option value="feature">
+                                {t("Feature")}/{t("Request")}
+                              </option>
+                              <option value="inquiry">
+                                {t("Inquiry")}/{t("Question")}
+                              </option>
                             </select>
                           </td>
                         </tr>
@@ -192,7 +206,7 @@ export default props => {
                           onClick={onUpdateTicket}
                           class="btn btn-warning"
                         >
-                          Update Ticket
+                          {t("Update Ticket")}
                         </button>
                       </tfoot>
                     </table>
@@ -206,3 +220,5 @@ export default props => {
     </div>
   );
 };
+
+// export default TicketEdit;

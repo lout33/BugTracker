@@ -4,9 +4,11 @@ import { Toast } from "../../animations/Alerts";
 
 import axios from "axios";
 import { backend_route } from "../../GlobalVariables";
+import { useTranslation } from "react-i18next";
 
 export function Comments({ props, commentsDetail, setCommentsDetail }) {
   const { user } = useContext(Context);
+  const { t } = useTranslation();
 
   ////////////////////////Card-General////////////////////////
   const [filteredArray, setFilteredArray] = useState([]);
@@ -114,25 +116,27 @@ export function Comments({ props, commentsDetail, setCommentsDetail }) {
   return (
     <div>
       <div>
-        <h4>Add a comment?</h4>
+        <h4> {t("Add a comment")}?</h4>
         <textarea
           required={true}
           rows="4"
           cols="50"
-          className="form-control  mb-4   "
+          className="form-control  mb-4"
           value={message}
           onChange={onHandleMessage}
           type="text"
           placeholder="Your commnets goes here"
         ></textarea>
         <button onClick={onSendComment} className="btn btn-warning">
-          Add
+          {t("Add")}
         </button>
       </div>
       <div className="card">
         <div className="card-header card-header-info">
-          <h6 className="card-title ">Tickets Comments</h6>
-          <p className="card-category">All your cooments for this tickets</p>
+          <h6 className="card-title ">{t("Tickets Comments")}</h6>
+          <p className="card-category">
+            {t("All your cooments for this tickets")}
+          </p>
         </div>
         <div className="card-body">
           <div className="table-responsive">
@@ -159,9 +163,9 @@ export function Comments({ props, commentsDetail, setCommentsDetail }) {
             <table className="table ">
               <thead>
                 <tr>
-                  <th className="font-weight-bold">Commenter</th>
-                  <th className="font-weight-bold">Message</th>
-                  <th className="font-weight-bold">Created at</th>
+                  <th className="font-weight-bold">{t("Commenter")}</th>
+                  <th className="font-weight-bold">{t("Message")}</th>
+                  <th className="font-weight-bold">{t("Created at")}</th>
                 </tr>
               </thead>
               <tbody>

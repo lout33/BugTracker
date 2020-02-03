@@ -1,11 +1,15 @@
 import React, { useState, useEffect, useContext } from "react";
 import { Context } from "../../Context";
 import { Toast } from "../../animations/Alerts";
+import { Link } from "@reach/router";
 
 import axios from "axios";
 import { backend_route } from "../../GlobalVariables";
+import { useTranslation } from "react-i18next";
 
 export function Attachments({ props, imagesDetail, setImagesDetail }) {
+  const { t } = useTranslation();
+
   const { user } = useContext(Context);
 
   ////////////////////////Card-General////////////////////////
@@ -157,12 +161,12 @@ export function Attachments({ props, imagesDetail, setImagesDetail }) {
   return (
     <div>
       <div>
-        <h4>Add a Attachment?</h4>
+        <h4> {t("Add a Attachment")}?</h4>
         <form>
           <div className="form-group">
             <label htmlFor="exampleFormControlFile1">
               <i className="material-icons">move_to_inbox</i>
-              Click Here | To add your images
+              {t("Click Here")} |{t("To add your images")}
             </label>
             <input
               id="exampleFormControlFile1"
@@ -182,14 +186,16 @@ export function Attachments({ props, imagesDetail, setImagesDetail }) {
           cols="50"
         />
         <button className="btn btn-warning" onClick={onSendImage}>
-          Add
+          {t("Add")}
         </button>
       </div>
 
       <div className="card">
         <div className="card-header card-header-info">
-          <h6 className="card-title ">Tickets Attachtment</h6>
-          <p className="card-category">All filles attached to this ticket</p>
+          <h6 className="card-title ">{t("Tickets Attachtment")} </h6>
+          <p className="card-category">
+            {t("All files attached to this ticket")}
+          </p>
         </div>
         <div className="card-body">
           <div className="table-responsive">
@@ -216,10 +222,10 @@ export function Attachments({ props, imagesDetail, setImagesDetail }) {
             <table className="table ">
               <thead className="font-weight-bold">
                 <tr>
-                  <th className="font-weight-bold">File</th>
-                  <th className="font-weight-bold">Uploader</th>
-                  <th className="font-weight-bold">Description</th>
-                  <th className="font-weight-bold"> Created</th>
+                  <th className="font-weight-bold">{t("File")} </th>
+                  <th className="font-weight-bold">{t("Uploader")} </th>
+                  <th className="font-weight-bold">{t("Description")} </th>
+                  <th className="font-weight-bold">{t("Created")} </th>
                 </tr>
               </thead>
               <tbody>
@@ -234,7 +240,7 @@ export function Attachments({ props, imagesDetail, setImagesDetail }) {
                           data-toggle="modal"
                           data-target={"#" + index}
                         >
-                          View Image
+                          {t("View Image")}
                         </button>
                         {/* <!-- Modal --> */}
                         <div
@@ -252,7 +258,7 @@ export function Attachments({ props, imagesDetail, setImagesDetail }) {
                                   className="modal-title"
                                   id="exampleModalLabel"
                                 >
-                                  Image
+                                  {t("Image")}
                                 </h5>
                                 <button
                                   type="button"
@@ -264,15 +270,18 @@ export function Attachments({ props, imagesDetail, setImagesDetail }) {
                                 </button>
                               </div>
                               <div className="modal-body">
-                                <img width="300px" src={image.url} alt="" />
+                                <a href={image.url} download>
+                                  <img width="300px" src={image.url} alt="" />
+                                </a>
                               </div>
+
                               <div className="modal-footer">
                                 <button
                                   type="button"
                                   className="btn btn-secondary"
                                   data-dismiss="modal"
                                 >
-                                  Close
+                                  {t("Close")}
                                 </button>
                               </div>
                             </div>

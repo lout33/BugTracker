@@ -4,9 +4,11 @@ import axios from "axios";
 
 import { Chart } from "react-google-charts";
 import { backend_route } from "./../GlobalVariables";
+import { useTranslation } from "react-i18next";
 
 export default () => {
   const { user, typeUser } = useContext(Context);
+  const { t } = useTranslation();
 
   const [listOfTicketsToGraph, setListOfTicketsToGraph] = useState([]);
   useEffect(() => {
@@ -231,13 +233,12 @@ export default () => {
           <div className="row d-flex flex-row justify-content-around">
             <div className="col-md-6  p-3 mb-2  bg-white overflow-hidden">
               <div>
-                <h3>Tickets by Priority</h3>
-                <h4>All the tickets classify by priority</h4>
+                <h3> {t("Tickets by Priority")}</h3>
+                <h4>{t("All the tickets classify by priority")}</h4>
               </div>
               <div className="card bg-warning">
                 <div className="card-header card-header-info ">
                   <Chart
-                    // width={"500px"}
                     height={"300px"}
                     chartType="Bar"
                     loader={
@@ -248,6 +249,7 @@ export default () => {
                       />
                     }
                     data={[
+                      // "" para que no se agrege un titulo incesario
                       ["", "LOW", "MEDIUM", "HIGH", "URGENT"],
                       [
                         "PRIORITY",
@@ -269,14 +271,13 @@ export default () => {
             <div className="col-md-6 p-3 mb-2   bg-white overflow-hidden">
               {/* //tickets by type  DONA */}
               <div>
-                <h3>Tickets by Type</h3>
-                <h4>All the tickets classify by type</h4>
+                <h3>{t("Tickets by Type")}</h3>
+                <h4>{t("All the tickets classify by type")}</h4>
               </div>
               <div className="card bg-warning">
                 <div className="card-header card-header-info">
                   <Chart
                     chartType="PieChart"
-                    // width={"500px"}
                     loader={
                       <img
                         src={require("./../images/loading.gif")}
@@ -303,13 +304,12 @@ export default () => {
 
             <div className="col-md-6 p-3 mb-2  bg-white overflow-hidden">
               <div>
-                <h3>Tickets By Status</h3>
-                <h4>All the tickets classify by status</h4>
+                <h3>{t("Tickets By Status")}</h3>
+                <h4>{t("All the tickets classify by status")}</h4>
               </div>
               <div className="card bg-warning">
                 <div className="card-header card-header-info">
                   <Chart
-                    // width={"500px"}
                     height={"300px"}
                     chartType="Bar"
                     loader={
@@ -329,7 +329,6 @@ export default () => {
                       ]
                     ]}
                     options={{
-                      // Material design options
                       chart: {},
                       colors: ["#F44336", "#FF9800", , "#2196F3"]
                     }}
@@ -341,14 +340,13 @@ export default () => {
             <div className="col-md-6 p-3 mb-2  bg-white overflow-hidden">
               {/* //tickets by assigned developer DONA */}
               <div>
-                <h3>Tickets assigned to Developers</h3>
-                <h4>All the tickets assigned to a developer</h4>
+                <h3>{t("Tickets assigned to Developers")}</h3>
+                <h4>{t("All the tickets assigned to a developer")}</h4>
               </div>
               <div className="card bg-warning">
                 <div className="card-header card-header-info">
                   <Chart
                     chartType="PieChart"
-                    // width={"500px"}
                     loader={
                       <img
                         src={require("./../images/loading.gif")}
@@ -370,8 +368,8 @@ export default () => {
           </div>
         </div>
       </div>
-      {/* </div>
-      </div> */}
     </Fragment>
   );
 };
+
+// export default DashboardHome;

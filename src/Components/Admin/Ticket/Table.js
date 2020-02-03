@@ -8,7 +8,10 @@ import "./../../styles.css";
 import Swal from "sweetalert2";
 import { SuccesCenterTimer } from "../../../animations/Alerts";
 
+import { useTranslation } from "react-i18next";
 export function Table({ filteredArray }) {
+  const { t } = useTranslation();
+
   ////////////////////////////////////////////////////////////////////////////////////////////
   const {
     myPersonel,
@@ -97,14 +100,14 @@ export function Table({ filteredArray }) {
       <table className="table ">
         <thead className=" ">
           <tr>
-            <th className="font-weight-bold">title</th>
-            <th className="font-weight-bold">projectName</th>
-            <th className="font-weight-bold">assignedDeveloper</th>
-            <th className="font-weight-bold">priority</th>
-            <th className="font-weight-bold">status</th>
-            <th className="font-weight-bold">type</th>
-            <th className="font-weight-bold">createdAt</th>
-            <th className="font-weight-bold">details</th>
+            <th className="font-weight-bold"> {t("title")}</th>
+            <th className="font-weight-bold">{t("projectName")}</th>
+            <th className="font-weight-bold">{t("assignedDeveloper")}</th>
+            <th className="font-weight-bold">{t("priority")}</th>
+            <th className="font-weight-bold">{t("status")}</th>
+            <th className="font-weight-bold">{t("type")}</th>
+            <th className="font-weight-bold">{t("createdAt")}</th>
+            <th className="font-weight-bold">{t("details")}</th>
           </tr>
         </thead>
         <tbody>
@@ -123,9 +126,9 @@ export function Table({ filteredArray }) {
                 <td> {ticket.createdAt}</td>
 
                 <td className="text-secondary">
-                  <Link to={`./details/${ticket._id}`}>details</Link>
+                  <Link to={`./details/${ticket._id}`}>{t("details")}</Link>
                   <br />
-                  <Link to={`./edit/${ticket._id}`}>edit</Link>
+                  <Link to={`./edit/${ticket._id}`}>{t("edit")}</Link>
                   <br />
                   <button
                     className="btn btn-danger btn-sm"
@@ -133,7 +136,7 @@ export function Table({ filteredArray }) {
                       onDeleteTicketById(ticket._id);
                     }}
                   >
-                    Delete
+                    {t("Delete")}
                     <i className="material-icons ml-1">delete_forever</i>
                   </button>
                 </td>

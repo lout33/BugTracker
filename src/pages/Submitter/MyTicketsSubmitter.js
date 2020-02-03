@@ -5,8 +5,11 @@ import { Link } from "@reach/router";
 
 import { backend_route } from "./../../GlobalVariables";
 import { NewTicketModal } from "../../Components/Submitter/NewTicketModal";
+import { useTranslation } from "react-i18next";
 
 export default function MyTicketsSubmitter() {
+  const { t } = useTranslation();
+
   const { listProyects, listTickets, setListTickets } = useContext(Context);
 
   const [loading, setloading] = useState(true);
@@ -111,15 +114,17 @@ export default function MyTicketsSubmitter() {
         <div className="container-fluid">
           {/* LAYOUT */}
           {/* YOUR CONTENT  */}
-          <h4> Create New Ticket </h4>
+          <h4>{t("Create New Ticket")} </h4>
           <NewTicketModal></NewTicketModal>
 
           <hr />
 
           <div class="card">
             <div class="card-header card-header-info">
-              <h4 class="card-title ">Your Tickets</h4>
-              <p class="card-category">All your Tickets in your database</p>
+              <h4 class="card-title ">{t("Your Tickets")}</h4>
+              <p class="card-category">
+                {t("All your Tickets in your database")}
+              </p>
             </div>
             <div class="card-body">
               <div class="table-responsive">
@@ -145,13 +150,15 @@ export default function MyTicketsSubmitter() {
                 {/* ///////////////////Search/////////////////////////// */}
                 <table class="table ">
                   <thead className="font-weight-bold">
-                    <th className="font-weight-bold">title</th>
-                    <th className="font-weight-bold">projectName</th>
-                    <th className="font-weight-bold">assignedDeveloper</th>
-                    <th className="font-weight-bold">priority</th>
-                    <th className="font-weight-bold">status</th>
-                    <th className="font-weight-bold">type</th>
-                    <th className="font-weight-bold">createdAt</th>
+                    <th className="font-weight-bold">{t("title")}</th>
+                    <th className="font-weight-bold">{t("projectName")}</th>
+                    <th className="font-weight-bold">
+                      {t("assignedDeveloper")}
+                    </th>
+                    <th className="font-weight-bold">{t("priority")}</th>
+                    <th className="font-weight-bold">{t("status")}</th>
+                    <th className="font-weight-bold">{t("type")}</th>
+                    <th className="font-weight-bold">{t("createdAt")}</th>
                     {/* <th className="font-weight-bold">details</th> */}
                   </thead>
                   <tbody>
@@ -179,7 +186,7 @@ export default function MyTicketsSubmitter() {
 
                             <td class="text-primary">
                               <Link to={`./details/${ticket._id}`}>
-                                details
+                                {t("details")}
                               </Link>
                             </td>
                           </tr>

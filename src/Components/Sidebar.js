@@ -3,8 +3,11 @@ import { Context } from "./../Context";
 import { Link } from "@reach/router";
 import styled from "styled-components";
 import "./styles.css";
-export default function Sidebar() {
+import { useTranslation } from "react-i18next";
+
+export default () => {
   const { user, typeUser } = useContext(Context);
+  const { t, i18n } = useTranslation();
 
   const [selectedButton, setSelectedButton] = useState(
     window.sessionStorage.getItem("active") || "dashboard"
@@ -38,7 +41,7 @@ export default function Sidebar() {
             <img src={require("./../images/logo.png")} width={"80px"} alt="" />
           </div>
           <div className="overflow-hidden w-75">
-            <h3>Welcome</h3>
+            <h3>{t("Welcome")}</h3>
             <h4 className="font-weight-normal text-capitalize overflow-hidden">
               {user.name}
             </h4>
@@ -57,7 +60,7 @@ export default function Sidebar() {
               }}
             >
               <i className="material-icons">dashboard</i>
-              <p>Dashboard</p>
+              <p>{t("Dashboard")}</p>
             </Link>
           </li>
           {typeUser === "admin" && (
@@ -75,7 +78,8 @@ export default function Sidebar() {
                   }}
                 >
                   <i className="material-icons">group_add</i>
-                  <p>Manage Role Assignment</p>
+
+                  <p>{t("Manage Role Assignment")}</p>
                 </Link>
               </li>
               <li
@@ -93,7 +97,7 @@ export default function Sidebar() {
                   to="/manageProject"
                 >
                   <i className="material-icons">"people_alt"</i>
-                  <p>Manage Projects Users</p>
+                  <p>{t("Manage Projects Users")}</p>
                 </Link>
               </li>
             </Fragment>
@@ -112,7 +116,8 @@ export default function Sidebar() {
               to="/myProjects"
             >
               <i className="material-icons">library_books</i>
-              <p>My projects </p>
+
+              <p>{t("My projects")}</p>
             </Link>
           </li>
           <li
@@ -128,13 +133,13 @@ export default function Sidebar() {
               to="/myTickets"
             >
               <i className="material-icons">loyalty</i>
-              <p>My tickets </p>
+              <p>{t("My tickets")} </p>
             </Link>
           </li>
         </ul>
       </div>
     </div>
   );
-}
+};
 
 const List = styled.li``;

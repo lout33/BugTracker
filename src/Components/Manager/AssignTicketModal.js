@@ -3,11 +3,13 @@ import { Context } from "../../Context";
 import axios from "axios";
 import { backend_route } from "../../GlobalVariables";
 import { Toast } from "../../animations/Alerts";
+import { useTranslation } from "react-i18next";
 
 export default function AssignTicketModal() {
   const { listProyects, listTickets, setListTickets, user } = useContext(
     Context
   );
+  const { t } = useTranslation();
 
   useEffect(() => {
     axios
@@ -107,7 +109,7 @@ export default function AssignTicketModal() {
         data-toggle="modal"
         data-target="#exampleModal2"
       >
-        Assign
+        {t("Assign")}
       </button>
       {/* <!-- Modal --> */}
       <div
@@ -122,7 +124,7 @@ export default function AssignTicketModal() {
           <div class="modal-content">
             <div class="modal-header">
               <h4 class="modal-title" id="exampleModalLabel">
-                ASSIGN TICKET TO DEV
+                {t("ASSIGN TICKET TO DEV")}
               </h4>
               <button
                 type="button"
@@ -135,7 +137,7 @@ export default function AssignTicketModal() {
             </div>
             <div class="modal-body">
               <div>
-                <h4>Pick your ticket</h4>
+                <h4> {t("Pick your ticket")}</h4>
 
                 <select
                   value={pickedTicket}
@@ -158,7 +160,7 @@ export default function AssignTicketModal() {
               </div>
               <br />
               <div>
-                <h4>Pick your dev</h4>
+                <h4> {t("Pick your dev")}</h4>
 
                 <select
                   value={pickedDeveloper}
@@ -187,12 +189,12 @@ export default function AssignTicketModal() {
                 class="btn btn-warning"
                 data-dismiss="modal"
               >
-                Assing and close
+                {t("Assing and close")}
               </button>
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-danger" data-dismiss="modal">
-                Close
+                {t("Close")}
               </button>
             </div>
           </div>
