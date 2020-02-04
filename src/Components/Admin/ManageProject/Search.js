@@ -16,7 +16,7 @@ export function Search({ setFilteredArray }) {
 
   useEffect(() => {
     // filtro por cada input del usuario
-    setFilteredArray(itemsFiltered(searchedWord, myPersonel));
+    setFilteredArray(itemsFiltered(searchedWord, myPersonel,["name", "email", "assignedProjects"]));
     // console.log(searchedWord);
   }, [searchedWord]);
 

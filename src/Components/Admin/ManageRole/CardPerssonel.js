@@ -8,19 +8,12 @@ export function CardPersonnel() {
   const { t } = useTranslation();
 
   return (
-    <div>
-      <div className="card">
-        <div className="card-header card-header-info ">
-          <h4 className="card-title ">{t("Your Personnel")}</h4>
-          <p className="card-category">
-            {t("All your personnel in your database")}
-          </p>
-        </div>
-        <div className="card-body">
-          <Search setFilteredArray={setFilteredArray}></Search>
-          <Table filteredArray={filteredArray}></Table>
-        </div>
-      </div>
-    </div>
+    <CardPersonnel
+      title="Your Personnel"
+      description="All your personnel in your database"
+    >
+      <Search setFilteredArray={setFilteredArray}></Search>
+      <Table filteredArray={filteredArray}></Table>
+    </CardPersonnel>
   );
 }
