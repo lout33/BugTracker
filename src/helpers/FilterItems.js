@@ -8,17 +8,23 @@ export const itemsFiltered = (searchedItem, arrayOfObject) => {
     for (let i = 0; i < toFilter.length; i++) {
 
       if (obj[toFilter[i]]) {
-        if (obj[toFilter[i]].length > 1) {
+        console.log(Array.isArray(obj[toFilter[i]]));
+        
+        if ( Array.isArray(obj[toFilter[i]] )) {
+          
           for (let j = 0; j < obj[toFilter[i]].length; j++) {
-            objectClean[toFilter[j]] = obj[toFilter[i]][j];
+            objectClean[[j]] = obj[toFilter[i]][j];
           }
-          return
+          
+        }else{
+          objectClean[toFilter[i]] = obj[toFilter[i]];
         }
-        objectClean[toFilter[i]] = obj[i];
       } else {
-        objectClean[i] = "";
+        objectClean[toFilter[i]] = "";
       }
     }
+    console.log(objectClean);
+    
     for (let key in objectClean) {
       if (
         JSON.stringify(objectClean[key])
