@@ -1,4 +1,11 @@
-import React, { useState, useEffect, useContext, Suspense, lazy } from "react";
+import React, {
+  useState,
+  useEffect,
+  useContext,
+  Suspense,
+  lazy,
+  Fragment
+} from "react";
 import { Context } from "./Context";
 import axios from "axios";
 
@@ -19,6 +26,8 @@ import "./App.css";
 import NotFound from "./pages/NotFound";
 import { backend_route } from "./GlobalVariables";
 import Spinner from "./utils/Spinner";
+import Wrapper from "./Components/Layout/Wrapper";
+import MainPanel from "./Components/Layout/MainPanel";
 
 // import Navbar from "./Components/Navbar";
 // import Sidebar from "./Components/Sidebar";
@@ -84,64 +93,49 @@ function App(props) {
   }, [isAuth]);
 
   return (
-    <Suspense
-      fallback={
-        <Spinner/>
-      }
-    >
-      <div className="wrapper">
-        <Sidebar/>
-        <div className="main-panel">
-          <Navbar/>
+    <Suspense fallback={<Spinner />}>
+      <Wrapper>
+        <Sidebar />
+        <MainPanel>
+          <Navbar />
           <Router>
-            {isAuth && <Redirect noThrow from="/getin" to="/"/>}
-            <GetIn path="/getin"/>
-            {!isAuth && <Redirect noThrow from="/" to="/getin"/>}
-            {/* {!isAuth && <Redirect noThrow from="/*" to="/getin"></Redirect>} */}
-
-            {/* //Para cuando este logeado */}
-
+            {isAuth && <Redirect noThrow from="/getin" to="/" />}
+            <GetIn path="/getin" />
+            {!isAuth && <Redirect noThrow from="/" to="/getin" />}
             {isLoading ? (
-              <NotFound default/>
+              <NotFound default />
             ) : (
-              <DashboardHome exact path="/"/>
+              <DashboardHome exact path="/" />
+            )}
+            {isAuth && <ManageRoleAssignment path="/manageRole" />}
+            {isAuth && <ManageProjectUsers path="/manageProject" />}
+            {typeUser == "admin" && <MyProjects path="/myProjects" />}
+            {typeUser == "admin" && <MyTickets path="/myTickets" />}
+
+            {typeUser == "submitter" && (
+              <MyProjectsSubmitter path="/myProjects" />
             )}
 
-            {isAuth && (
-              <ManageRoleAssignment path="/manageRole"/>
-            )}
-            {isAuth && (
-              <ManageProjectUsers path="/manageProject"/>
-            )}
-            {typeUser == "admin" && (
-              <MyProjects path="/myProjects"/>
-            )}
-            {typeUser == "admin" && <MyTickets path="/myTickets"/>}
             {typeUser == "submitter" && (
-              <MyProjectsSubmitter path="/myProjects"/>
+              <MyTicketsSubmitter path="/myTickets" />
             )}
-            {typeUser == "submitter" && (
-              <MyTicketsSubmitter path="/myTickets"/>
-            )}
-            {typeUser == "manager" && (
-              <MyProjectsManager path="/myProjects"/>
-            )}
-            {typeUser == "manager" && (
-              <MyTicketsManager path="/myTickets"/>
+
+            {typeUser == "manager" && <MyProjectsManager path="/myProjects" />}
+            {typeUser == "manager" && <MyTicketsManager path="/myTickets" />}
+
+            {typeUser == "developer" && (
+              <MyProjectsDeveloper path="/myProjects" />
             )}
             {typeUser == "developer" && (
-              <MyProjectsDeveloper path="/myProjects"/>
+              <MyTicketsDeveloper path="/myTickets" />
             )}
-            {typeUser == "developer" && (
-              <MyTicketsDeveloper path="/myTickets"/>
-            )}
-            <ProjectDetail path="/myProjects/details/:projectId"/>
-            <TicketDetail path={`/myTickets/details/:ticketId`}/>
-            <TicketEdit path={`/myTickets/edit/:ticketId`}/>
-            <NotFound default/>
+            <ProjectDetail path="/myProjects/details/:projectId" />
+            <TicketDetail path={`/myTickets/details/:ticketId`} />
+            <TicketEdit path={`/myTickets/edit/:ticketId`} />
+            <NotFound default />
           </Router>
-        </div>
-      </div>
+        </MainPanel>
+      </Wrapper>
     </Suspense>
   );
 }
