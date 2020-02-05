@@ -1,23 +1,23 @@
 import React, { useState, useEffect, useContext } from "react";
 import { Context } from "../../Context";
 import axios from "axios";
-import Navbar from "../../Components/Navbar";
-import Sidebar from "../../Components/Sidebar";
-import { backend_route } from "./../../GlobalVariables";
 import { Link } from "@reach/router";
-import { Toast } from "./../../animations/Alerts";
-import "./../../App.css";
+
+import { backend_route } from "../../GlobalVariables";
+import { NewTicketModal } from "./NewTicketModal";
 import { useTranslation } from "react-i18next";
-export default function MyTicketsDeveloper() {
+
+export default function MyTicketsSubmitter() {
   const { t } = useTranslation();
 
-  const { listTickets, setListTickets } = useContext(Context);
+  const { listProyects, listTickets, setListTickets } = useContext(Context);
+
   const [loading, setloading] = useState(true);
 
   useEffect(() => {
     axios
       .get(
-        `${backend_route}/api/developer/ticket/getTicketsByAssignedManager`,
+        `${backend_route}/api/submitter/ticket/getTicketsCreatedBySubmitter`,
         {
           headers: { "auth-token": window.sessionStorage.getItem("token") }
         }
@@ -26,7 +26,6 @@ export default function MyTicketsDeveloper() {
         if (res.request.status === 200) {
           try {
             console.log(res.data);
-
             setListTickets(res.data);
             setloading(false);
           } catch (error) {
@@ -38,66 +37,12 @@ export default function MyTicketsDeveloper() {
       });
   }, []);
 
-  const [ticketId, setTicketId] = useState("");
-  const [status, setStatus] = useState();
-
-  useEffect(() => {
-    axios
-      .post(
-        `${backend_route}/api/developer/ticket/updateTicketStatusByDev`,
-        { status: status, ticketId: ticketId },
-        {
-          headers: { "auth-token": window.sessionStorage.getItem("token") }
-        }
-      )
-      .then(res => {
-        Toast.fire({
-          icon: "success",
-          title: "Process executed with success"
-        });
-        axios
-          .get(
-            `${backend_route}/api/developer/ticket/getTicketsByAssignedManager`,
-            {
-              headers: {
-                "auth-token": window.sessionStorage.getItem("token")
-              }
-            }
-          )
-          .then(res => {
-            console.log(res.data);
-
-            setListTickets(res.data);
-          })
-          .catch(err => {
-            console.log(err);
-            Toast.fire({
-              icon: "error",
-              title: "Process NOT executed with success"
-            });
-          });
-      })
-      .catch(err => {
-        console.log(err);
-
-        Toast.fire({
-          icon: "error",
-          title: "Process NOT executed with success"
-        });
-      });
-  }, [status]);
-
-  const handleStatusChange = e => {
-    setStatus(e.target.value);
-    setTicketId(e.target.name);
-    // console.log(ticketId);
-  };
-
   ////////////////////////Card-General////////////////////////
   const [filteredArray, setFilteredArray] = useState([]);
   ////////////////////////Card-General////////////////////////
 
   ////////////////////////Search////////////////////////
+
   const [searchedWord, setSearchedWord] = useState("");
   useEffect(() => {
     setFilteredArray(listTickets);
@@ -167,15 +112,22 @@ export default function MyTicketsDeveloper() {
     <div className="mt-3">
       <div className="content">
         <div className="container-fluid">
-          <div className="card">
-            <div className="card-header card-header-info">
-              <h4 className="card-title ">{t("Your Tickets")}</h4>
-              <p className="card-category">
+          {/* LAYOUT */}
+          {/* YOUR CONTENT  */}
+          <h4>{t("Create New Ticket")} </h4>
+          <NewTicketModal></NewTicketModal>
+
+          <hr />
+
+          <div class="card">
+            <div class="card-header card-header-info">
+              <h4 class="card-title ">{t("Your Tickets")}</h4>
+              <p class="card-category">
                 {t("All your Tickets in your database")}
               </p>
             </div>
-            <div className="card-body">
-              <div className="table-responsive">
+            <div class="card-body">
+              <div class="table-responsive">
                 {/* ///////////////////Search/////////////////////////// */}
                 <div className="input-group no-border w-100  d-flex flex-row-reverse">
                   <div className="input-group no-border w-50  ">
@@ -196,76 +148,46 @@ export default function MyTicketsDeveloper() {
                   </div>
                 </div>
                 {/* ///////////////////Search/////////////////////////// */}
-                <table className="table ">
+                <table class="table ">
                   <thead className="font-weight-bold">
-                    <tr>
-                      <th>{t("Name")}</th>
-                      <th>{t("Assigned Developer")}</th>
-                      <th>{t("Priority")}</th>
-                      <th>{t("Status")}</th>
-                      <th>{t("Details")}</th>
-                      <th>{t("Change Status")}</th>
-                    </tr>
+                    <th className="font-weight-bold">{t("title")}</th>
+                    <th className="font-weight-bold">{t("projectName")}</th>
+                    <th className="font-weight-bold">
+                      {t("assignedDeveloper")}
+                    </th>
+                    <th className="font-weight-bold">{t("priority")}</th>
+                    <th className="font-weight-bold">{t("status")}</th>
+                    <th className="font-weight-bold">{t("type")}</th>
+                    <th className="font-weight-bold">{t("createdAt")}</th>
+                    {/* <th className="font-weight-bold">details</th> */}
                   </thead>
                   <tbody>
                     {loading ? (
-                      <tr>
-                        <td>
-                          <img
-                            src={require("./../../images/loading.gif")}
-                            width={"80px"}
-                            alt=""
-                          />
-                        </td>
-                      </tr>
+                      <img
+                        src={require("./../../images/loading.gif")}
+                        width={"80px"}
+                        alt=""
+                      />
                     ) : (
                       currentListOfTickets.map((ticket, index) => {
                         return (
                           <tr key={index}>
                             <td>{ticket.name}</td>
+                            <td>{ticket.byProjectName}</td>
+
                             <td>
                               {ticket.assignedDeveloper &&
                                 ticket.assignedDeveloper.devName}
                             </td>
                             <td> {ticket.priority}</td>
-                            <td>{ticket.status}</td>
-                            <td className="text-secondary">
+                            <td> {ticket.status}</td>
+                            <td> {ticket.type}</td>
+                            <td> {ticket.createdAt}</td>
+
+                            <td class="text-primary">
                               <Link to={`./details/${ticket._id}`}>
-                                <td>{t("details")}</td>
+                                {t("details")}
                               </Link>
-                            </td>
-                            <td>
-                              <select
-                                value={ticket.status}
-                                name={ticket._id}
-                                onChange={handleStatusChange}
-                                className={`w-75 btn btn-warning  btn-sm list-group`}
-                              >
-                                <option
-                                  className={
-                                    "optionDanger list-group-item list-group-item-action  b "
-                                  }
-                                  value="informado"
-                                >
-                                  {t("Informado")}
-                                </option>
-                                <option
-                                  className={
-                                    "optionWarning list-group-item list-group-item-action   "
-                                  }
-                                  value="inprogress"
-                                >
-                                  {t("In Progress")}
-                                </option>
-                                <option
-                                  className={
-                                    "optionInfo list-group-item list-group-item-action   "
-                                  }
-                                  value="closed"
-                                >
-                                  {t("Closed")}
-                                </option>
-                              </select>
                             </td>
                           </tr>
                         );
@@ -274,22 +196,20 @@ export default function MyTicketsDeveloper() {
                   </tbody>
                   <tfoot>
                     <tr>
-                      <td>
-                        <nav>
-                          <ul className="pagination">
-                            {pageNumbers.map(number => (
-                              <li key={number} className="page-item">
-                                <a
-                                  onClick={() => paginate(number)}
-                                  className="page-link"
-                                >
-                                  {number}
-                                </a>
-                              </li>
-                            ))}
-                          </ul>
-                        </nav>
-                      </td>
+                      <nav>
+                        <ul className="pagination">
+                          {pageNumbers.map(number => (
+                            <li key={number} className="page-item">
+                              <a
+                                onClick={() => paginate(number)}
+                                className="page-link"
+                              >
+                                {number}
+                              </a>
+                            </li>
+                          ))}
+                        </ul>
+                      </nav>
                     </tr>
                   </tfoot>
                 </table>
@@ -298,9 +218,6 @@ export default function MyTicketsDeveloper() {
           </div>
         </div>
       </div>
-
-      {}
-      {/* lista de devs */}
     </div>
   );
 }

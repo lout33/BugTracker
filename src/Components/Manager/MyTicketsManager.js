@@ -3,8 +3,8 @@ import { Context } from "../../Context";
 import axios from "axios";
 import { Link } from "@reach/router";
 
-import { backend_route } from "./../../GlobalVariables";
-import AssignTicketModal from "../../Components/Manager/AssignTicketModal";
+import { backend_route } from "../../GlobalVariables";
+import AssignTicketModal from "./AssignTicketModal";
 import { Toast } from "../../animations/Alerts";
 import Swal from "sweetalert2";
 import { SuccesCenterTimer } from "../../animations/Alerts";

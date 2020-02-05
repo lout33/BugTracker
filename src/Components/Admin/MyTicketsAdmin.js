@@ -3,13 +3,13 @@ import { Context } from "../../Context";
 import axios from "axios";
 
 import { Link } from "@reach/router";
-import { CardTickets } from "../../Components/Admin/Ticket/CardTickets";
+import { CardTickets } from "./Ticket/CardTickets";
 import { backend_route } from "../../GlobalVariables";
-import { NewTicketModal } from "../../Components/Admin/Ticket/NewTicketModal";
+import { NewTicketModal } from "./Ticket/NewTicketModal";
 import { Toast } from "../../animations/Alerts";
 import { useTranslation } from "react-i18next";
 
-const MyTickets = () => {
+export const MyTicketsAdmin = () => {
   const { t } = useTranslation();
 
   const {
@@ -220,4 +220,4 @@ const MyTickets = () => {
     </div>
   );
 };
-export default MyTickets;
+export default MyTicketsAdmin;

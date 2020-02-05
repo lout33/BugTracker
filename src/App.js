@@ -14,14 +14,7 @@ import { Router, Redirect } from "@reach/router";
 import ManageRoleAssignment from "./pages/Admin/ManageRoleAssignment";
 import ManageProjectUsers from "./pages/Admin/ManageProjectUsers";
 
-import MyProjectsSubmitter from "./pages/Submitter/MyProjectsSubmitter";
-import MyTicketsSubmitter from "./pages/Submitter/MyTicketsSubmitter";
 
-import MyProjectsManager from "./pages/Manager/MyProjectsManager";
-import MyTicketsManager from "./pages/Manager/MyTicketsManager";
-
-import MyProjectsDeveloper from "./pages/Developer/MyProjectsDeveloper";
-import MyTicketsDeveloper from "./pages/Developer/MyTicketsDeveloper";
 import "./App.css";
 import NotFound from "./pages/NotFound";
 import { backend_route } from "./GlobalVariables";
@@ -37,9 +30,9 @@ const Sidebar = lazy(() => import("./Components/Sidebar"));
 
 const DashboardHome = lazy(() => import("./pages/DashboardHome"));
 const GetIn = lazy(() => import("./pages/GetIn"));
-const MyProjects = lazy(() => import("./pages/Admin/MyProjects"));
+const MyProjects = lazy(() => import("./pages/MyProjects"));
 const ProjectDetail = lazy(() => import("./pages/ProjectDetail"));
-const MyTickets = lazy(() => import("./pages/Admin/MyTickets"));
+const MyTickets = lazy(() => import("./pages/MyTickets"));
 const TicketDetail = lazy(() => import("./pages/TicketDetail"));
 const TicketEdit = lazy(() => import("./pages/TicketEdit"));
 
@@ -109,7 +102,9 @@ function App(props) {
             )}
             {isAuth && <ManageRoleAssignment path="/manageRole" />}
             {isAuth && <ManageProjectUsers path="/manageProject" />}
-            {typeUser == "admin" && <MyProjects path="/myProjects" />}
+            <MyProjects path="/myProjects" />
+            <MyTickets path="/myTickets" />
+            {/* {typeUser == "admin" && <MyProjects path="/myProjects" />}
             {typeUser == "admin" && <MyTickets path="/myTickets" />}
 
             {typeUser == "submitter" && (
@@ -128,7 +123,7 @@ function App(props) {
             )}
             {typeUser == "developer" && (
               <MyTicketsDeveloper path="/myTickets" />
-            )}
+            )} */}
             <ProjectDetail path="/myProjects/details/:projectId" />
             <TicketDetail path={`/myTickets/details/:ticketId`} />
             <TicketEdit path={`/myTickets/edit/:ticketId`} />

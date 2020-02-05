@@ -8,7 +8,7 @@ import { backend_route } from "../../GlobalVariables";
 import { CardProjects } from "../../Components/Admin/Project/CardProjects";
 import { Toast } from "../../animations/Alerts";
 
-const MyProjects = () => {
+export const MyProjectsAdmin = () => {
   const { t } = useTranslation();
 
   // Validation --------------------------------------------->
@@ -166,4 +166,4 @@ const MyProjects = () => {
   );
 };
 
-export default MyProjects;
+export default MyProjectsAdmin;

@@ -1,9 +1,9 @@
 import React, { useState, useEffect, useContext } from "react";
 import { Context } from "../../Context";
 import axios from "axios";
-import Navbar from "../../Components/Navbar";
-import Sidebar from "../../Components/Sidebar";
-import { backend_route } from "./../../GlobalVariables";
+import Navbar from "../Navbar";
+import Sidebar from "../Sidebar";
+import { backend_route } from "../../GlobalVariables";
 import { useTranslation } from "react-i18next";
 
 export default function MyProjectsDeveloper() {
