@@ -90,57 +90,55 @@ function App(props) {
       }
     >
       <div className="wrapper">
-        <Sidebar></Sidebar>
+        <Sidebar/>
         <div className="main-panel">
-          {/* <!-- Navbar --> */}
-          <Navbar></Navbar>
+          <Navbar/>
           <Router>
-            {/* // Para cuando quiera entrar sin permiso */}
-            {isAuth && <Redirect noThrow from="/getin" to="/"></Redirect>}
-            <GetIn path="/getin"></GetIn>
-            {!isAuth && <Redirect noThrow from="/" to="/getin"></Redirect>}
+            {isAuth && <Redirect noThrow from="/getin" to="/"/>}
+            <GetIn path="/getin"/>
+            {!isAuth && <Redirect noThrow from="/" to="/getin"/>}
             {/* {!isAuth && <Redirect noThrow from="/*" to="/getin"></Redirect>} */}
 
             {/* //Para cuando este logeado */}
 
             {isLoading ? (
-              <NotFound default></NotFound>
+              <NotFound default/>
             ) : (
-              <DashboardHome exact path="/"></DashboardHome>
+              <DashboardHome exact path="/"/>
             )}
 
             {isAuth && (
-              <ManageRoleAssignment path="/manageRole"></ManageRoleAssignment>
+              <ManageRoleAssignment path="/manageRole"/>
             )}
             {isAuth && (
-              <ManageProjectUsers path="/manageProject"></ManageProjectUsers>
+              <ManageProjectUsers path="/manageProject"/>
             )}
             {typeUser == "admin" && (
-              <MyProjects path="/myProjects"></MyProjects>
+              <MyProjects path="/myProjects"/>
             )}
-            {typeUser == "admin" && <MyTickets path="/myTickets"></MyTickets>}
+            {typeUser == "admin" && <MyTickets path="/myTickets"/>}
             {typeUser == "submitter" && (
-              <MyProjectsSubmitter path="/myProjects"></MyProjectsSubmitter>
+              <MyProjectsSubmitter path="/myProjects"/>
             )}
             {typeUser == "submitter" && (
-              <MyTicketsSubmitter path="/myTickets"></MyTicketsSubmitter>
+              <MyTicketsSubmitter path="/myTickets"/>
             )}
             {typeUser == "manager" && (
-              <MyProjectsManager path="/myProjects"></MyProjectsManager>
+              <MyProjectsManager path="/myProjects"/>
             )}
             {typeUser == "manager" && (
-              <MyTicketsManager path="/myTickets"></MyTicketsManager>
+              <MyTicketsManager path="/myTickets"/>
             )}
             {typeUser == "developer" && (
-              <MyProjectsDeveloper path="/myProjects"></MyProjectsDeveloper>
+              <MyProjectsDeveloper path="/myProjects"/>
             )}
             {typeUser == "developer" && (
-              <MyTicketsDeveloper path="/myTickets"></MyTicketsDeveloper>
+              <MyTicketsDeveloper path="/myTickets"/>
             )}
-            <ProjectDetail path="/myProjects/details/:projectId"></ProjectDetail>
-            <TicketDetail path={`/myTickets/details/:ticketId`}></TicketDetail>
-            <TicketEdit path={`/myTickets/edit/:ticketId`}></TicketEdit>
-            <NotFound default></NotFound>
+            <ProjectDetail path="/myProjects/details/:projectId"/>
+            <TicketDetail path={`/myTickets/details/:ticketId`}/>
+            <TicketEdit path={`/myTickets/edit/:ticketId`}/>
+            <NotFound default/>
           </Router>
         </div>
       </div>
