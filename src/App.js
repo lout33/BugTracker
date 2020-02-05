@@ -18,6 +18,7 @@ import MyTicketsDeveloper from "./pages/Developer/MyTicketsDeveloper";
 import "./App.css";
 import NotFound from "./pages/NotFound";
 import { backend_route } from "./GlobalVariables";
+import Spinner from "./utils/Spinner";
 
 // import Navbar from "./Components/Navbar";
 // import Sidebar from "./Components/Sidebar";
@@ -85,13 +86,7 @@ function App(props) {
   return (
     <Suspense
       fallback={
-        <div>
-          <img
-            className="spinner"
-            src={require("./images/loading.gif")}
-            alt=""
-          />
-        </div>
+        <Spinner/>
       }
     >
       <div className="wrapper">
