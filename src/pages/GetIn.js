@@ -12,19 +12,19 @@ export default () => {
 
   return (
     <BackgroundStyle>
-      {isLogginActive == "login" && (
+      {isLogginActive === "login" && (
         <Login
           isLogginActive={isLogginActive}
           setIsLogginActive={setIsLogginActive}
         />
       )}
-      {isLogginActive == "register" && (
+      {isLogginActive === "register" && (
         <Register
           isLogginActive={isLogginActive}
           setIsLogginActive={setIsLogginActive}
         ></Register>
       )}
-      {isLogginActive == "demouser" && (
+      {isLogginActive === "demouser" && (
         <DemoUser
           isLogginActive={isLogginActive}
           setIsLogginActive={setIsLogginActive}

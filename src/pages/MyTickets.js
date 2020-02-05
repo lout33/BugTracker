@@ -17,10 +17,10 @@ export default function MyProjects() {
 
   return (
     <div>
-      {typeUser == "admin" && <MyTicketsAdmin/>}
-      {typeUser == "manager" && <MyTicketsManager/>}
-      {typeUser == "developer" && <MyTicketsDeveloper/>}
-      {typeUser == "submitter" && <MyTicketsSubmitter/>}
+      {typeUser === "admin" && <MyTicketsAdmin/>}
+      {typeUser === "manager" && <MyTicketsManager/>}
+      {typeUser === "developer" && <MyTicketsDeveloper/>}
+      {typeUser === "submitter" && <MyTicketsSubmitter/>}
     </div>
   )
 }

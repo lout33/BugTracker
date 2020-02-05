@@ -45,7 +45,7 @@ const TicketEdit = lazy(() => import("./pages/TicketEdit"));
 // import TicketEdit from "./pages/TicketEdit";
 
 function App(props) {
-  const { isAuth, setIsAuth, setUser, typeUser, setTypeUser } = useContext(
+  const { isAuth, setIsAuth, setUser, setTypeUser } = useContext(
     Context
   );
 
@@ -104,26 +104,6 @@ function App(props) {
             {isAuth && <ManageProjectUsers path="/manageProject" />}
             <MyProjects path="/myProjects" />
             <MyTickets path="/myTickets" />
-            {/* {typeUser == "admin" && <MyProjects path="/myProjects" />}
-            {typeUser == "admin" && <MyTickets path="/myTickets" />}
-
-            {typeUser == "submitter" && (
-              <MyProjectsSubmitter path="/myProjects" />
-            )}
-
-            {typeUser == "submitter" && (
-              <MyTicketsSubmitter path="/myTickets" />
-            )}
-
-            {typeUser == "manager" && <MyProjectsManager path="/myProjects" />}
-            {typeUser == "manager" && <MyTicketsManager path="/myTickets" />}
-
-            {typeUser == "developer" && (
-              <MyProjectsDeveloper path="/myProjects" />
-            )}
-            {typeUser == "developer" && (
-              <MyTicketsDeveloper path="/myTickets" />
-            )} */}
             <ProjectDetail path="/myProjects/details/:projectId" />
             <TicketDetail path={`/myTickets/details/:ticketId`} />
             <TicketEdit path={`/myTickets/edit/:ticketId`} />
