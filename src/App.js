@@ -3,8 +3,7 @@ import React, {
   useEffect,
   useContext,
   Suspense,
-  lazy,
-  Fragment
+  lazy
 } from "react";
 import { Context } from "./Context";
 import axios from "axios";
@@ -60,13 +59,13 @@ function App(props) {
         console.log(data);
         setIsAuth(true);
         if (data.data.assignedProjects) {
-          if (data.data.role == "submitter") {
+          if (data.data.role === "submitter") {
             setTypeUser("submitter");
             setUser(data.data);
-          } else if (data.data.role == "developer") {
+          } else if (data.data.role === "developer") {
             setTypeUser("developer");
             setUser(data.data);
-          } else if (data.data.role == "manager") {
+          } else if (data.data.role === "manager") {
             setTypeUser("manager");
             setUser(data.data);
           } else {
